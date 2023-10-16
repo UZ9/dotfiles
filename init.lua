@@ -26,6 +26,7 @@ require("lazy").setup({
   { "neoclide/coc.nvim" },
   { "nvim-telescope/telescope.nvim", tag = "0.1.3", dependencies = { 'nvim-lua/plenary.nvim' } },
   { "nvim-tree/nvim-web-devicons" },
+  { "vim-airline/vim-airline" },
 })
 
 
