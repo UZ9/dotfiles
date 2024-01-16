@@ -1,10 +1,10 @@
 local ls = require("luasnip")
 local s = ls.snippet
+local fmt = require("luasnip.extras.fmt").fmt
 
 local function math()
     return vim.api.nvim_eval('vimtex#syntax#in_mathzone()') == 1
 end
-
 
 return {
     s({ trig="not", snippetType="autosnippet" },
@@ -51,19 +51,30 @@ return {
         [[
             \begin{solution}
                 <>
-            \end{solution}
+           \end{solution}
         ]],
 
         { i(1) }
     )),
 
-    s({ trig="$", snippetType = "autosnippet"},
+    s({ trig="mk", snippetType = "autosnippet"},
     fmta(
         [[
             $<>$
         ]],
         { i(1) }
     )),
+
+    s({ trig="beg"},
+    fmt([[
+        \begin{<>}
+            <>
+        \end{<>}
+    ]], {
+        i(1),
+        i(0),
+        rep(1),
+    }, { delimiters = "<>" } )),
 
     s({ trig="equation"},
     fmta(
@@ -84,5 +95,34 @@ return {
         ]],
         { i(1) }
         )
+    ),
+
+    s({ trig= "sometest"},
+    fmta(
+        [[
+            \begin <>
+        ]], { i(1) })
+    ),
+
+    s({ trig="([^%a])//", snippetType = "autosnippet", wordTrig = false, regTrig = true },
+    fmta(
+        [[
+            <>\frac{<>}{<>}
+        ]], { 
+            f( function(_, snip) return snip.captures[1] end ),
+            i(1),
+            i(2) }
     )
-}
+
+
+    ),
+
+    s({ trig="((\\d+)|(\\d*)(\\\\)?([A-Za-z]+)((\\^|_)(\\{\\d+\\}|\\d))*)/", snippetType="autosnippet", trigEngine="ecma"},
+    fmta(
+        [[
+            \frac{<>}{<>}<>
+        ]], { f(function (_, snip)
+            return snip.captures[1]
+        end), i(1), i(0) })
+        )
+    }
