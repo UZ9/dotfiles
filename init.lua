@@ -30,6 +30,7 @@ require("lazy").setup({
   { "folke/neoconf.nvim", cmd = "Neoconf" },
   { "lervag/vimtex" },
   "folke/neodev.nvim",
+  "jbyuki/venn.nvim",
   { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
   { "neoclide/coc.nvim" },
   { "nvim-telescope/telescope.nvim", tag = "0.1.3", dependencies = { 'nvim-lua/plenary.nvim' } },

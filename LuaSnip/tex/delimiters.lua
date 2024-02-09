@@ -1,6 +1,5 @@
 local ls = require("luasnip")
 local s = ls.snippet
-local fmt = require("luasnip.extras.fmt").fmt
 
 local function math()
     return vim.api.nvim_eval('vimtex#syntax#in_mathzone()') == 1
@@ -15,7 +14,14 @@ return {
         { t("\\lor") },
         { condition = math }
     ),
-
+    s({ trig="exists", snippetType="autosnippet" },
+        { t("\\exists") },
+        { condition = math}
+    ),
+    s({ trig="forall", snippetType="autosnippet" },
+        { t("\\forall") },
+        { condition = math}
+    ),
     s({ trig="and", snippetType="autosnippet" },
         { t("\\land") },
         { condition = math }
@@ -35,7 +41,15 @@ return {
         { t("\\equiv") },
         { condition = math }
     ),
-
+    s({ trig="exists", snippetType="autosnippet" },
+        fmta(
+            [[
+                \exists(<>}
+            ]],
+            { i(1) }
+        ),
+        { condition = math }
+    ),
     s({ trig="text", snippetType="autosnippet" },
         fmta(
             [[
@@ -51,31 +65,11 @@ return {
         [[
             \begin{solution}
                 <>
-           \end{solution}
+            \end{solution}
         ]],
 
         { i(1) }
     )),
-
-    s({ trig="mk", snippetType = "autosnippet"},
-    fmta(
-        [[
-            $<>$
-        ]],
-        { i(1) }
-    )),
-
-    s({ trig="beg"},
-    fmt([[
-        \begin{<>}
-            <>
-        \end{<>}
-    ]], {
-        i(1),
-        i(0),
-        rep(1),
-    }, { delimiters = "<>" } )),
-
     s({ trig="equation"},
     fmta(
         [[
@@ -96,33 +90,21 @@ return {
         { i(1) }
         )
     ),
-
-    s({ trig= "sometest"},
+    s({ trig="sec"},
     fmta(
         [[
-            \begin <>
-        ]], { i(1) })
-    ),
-
-    s({ trig="([^%a])//", snippetType = "autosnippet", wordTrig = false, regTrig = true },
-    fmta(
-        [[
-            <>\frac{<>}{<>}
-        ]], { 
-            f( function(_, snip) return snip.captures[1] end ),
-            i(1),
-            i(2) }
-    )
-
-
-    ),
-
-    s({ trig="((\\d+)|(\\d*)(\\\\)?([A-Za-z]+)((\\^|_)(\\{\\d+\\}|\\d))*)/", snippetType="autosnippet", trigEngine="ecma"},
-    fmta(
-        [[
-            \frac{<>}{<>}<>
-        ]], { f(function (_, snip)
-            return snip.captures[1]
-        end), i(1), i(0) })
+            \section{<>}
+        ]],
+        { i(1) }
         )
-    }
+    ),
+
+    s({ trig= "beg"},
+    fmta(
+        [[
+            \begin{<>}
+            <>
+            \end{<>}
+        ]], { i(1), i(0), rep(1) })
+    )
+}
