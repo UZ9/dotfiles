@@ -1,47 +1,49 @@
+-- VIMPLUG ALIASES
+local vim = vim
+local Plug = vim.fn['plug#']
+
+-- ESSENTIAL CONFIG VARIABLES
+vim.g.mapleader = " "
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 vim.opt.termguicolors = true
 
-vim.g.netrw_keepdir = 0
+vim.call('plug#begin')
 
-vim.api.nvim_exec(
-[[
-command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
-]], true)
+-- INITIALIZE PLUGINS
 
---vim.g.vimtex_view_general_options.latexmk = '-reuse-instance'
+-- Snippets
+Plug('L3MON4D3/LuaSnip', { ['tag'] = 'v2.*', ['do'] = 'make install_jsregexp'})
 
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
-end
-vim.opt.rtp:prepend(lazypath)
+-- LaTeX
+Plug('lervag/vimtex')
 
-vim.g.mapleader = " "
+-- Telescope search
+Plug('nvim-lua/plenary.nvim')
+Plug('nvim-telescope/telescope.nvim')
 
-require("lazy").setup({
-  "folke/which-key.nvim",
-  "dense-analysis/ale",
-  { "folke/neoconf.nvim", cmd = "Neoconf" },
-  { "lervag/vimtex" },
-  "folke/neodev.nvim",
-  "jbyuki/venn.nvim",
-  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
-  { "neoclide/coc.nvim" },
-  { "nvim-telescope/telescope.nvim", tag = "0.1.3", dependencies = { 'nvim-lua/plenary.nvim' } },
-  { "nvim-tree/nvim-web-devicons" },
-  { "vim-airline/vim-airline" },
-  {
-	"L3MON4D3/LuaSnip",
-	version = "v2.*",
-  }
-})
+-- nvim-tree
+Plug('kyazdani42/nvim-web-devicons')
+Plug('kyazdani42/nvim-tree.lua')
 
+-- LSP
+Plug('neovim/nvim-lspconfig')
+Plug('williamboman/mason.nvim')
+Plug('williamboman/mason-lspconfig.nvim')
+Plug('nvim-lua/lsp-status.nvim')
+Plug('nvim-treesitter/nvim-treesitter', {['do'] = ':TSUpdate'})
+
+-- THEME
+Plug('ellisonleao/gruvbox.nvim')
+
+vim.call('plug#end')
+
+vim.o.background = 'dark'
+vim.cmd([[colorscheme gruvbox]])
+
+-- CONFIGURE PLUGINS
+require('plugins')
+require('mappings')
 
 local set = vim.opt
 
@@ -54,17 +56,16 @@ set.conceallevel = 2
 
 set.number = true
 
-vim.cmd.colorscheme "catppuccin-macchiato"
-
 -- Configure telescope 
-local builtin = require('telescope.builtin')
+-- local builtin = require('telescope.builtin')
 
+-- Initialize LuaSnip
 require("luasnip.loaders.from_lua").load({paths = "./LuaSnip"})
 
-vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
-vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+--vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+--vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+--vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+--vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
 require("luasnip").config.set_config({
     enable_autosnippets = true,
@@ -80,6 +81,7 @@ imap <silent><expr> <S-Tab> luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '
 smap <silent><expr> <S-Tab> luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '<S-Tab>'
 ]]
 
+-- Configure VimTex
 vim.g.vimtex_complete_close_braces = 1
 vim.g.vimtex_view_general_viewer = "SumatraPDF"
 vim.g.vimtex_quickfix_open_on_warning = 0
