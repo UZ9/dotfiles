@@ -32,6 +32,27 @@ Plug('williamboman/mason.nvim')
 Plug('williamboman/mason-lspconfig.nvim')
 Plug('nvim-lua/lsp-status.nvim')
 Plug('nvim-treesitter/nvim-treesitter', {['do'] = ':TSUpdate'})
+Plug('simrat39/rust-tools.nvim')
+
+-- LaTeX-specific autocomplete
+Plug ("kdheepak/cmp-latex-symbols")
+
+-- Autocompletion
+Plug ('hrsh7th/cmp-nvim-lsp')
+Plug ('hrsh7th/cmp-nvim-lua')
+Plug ('hrsh7th/cmp-buffer')
+Plug ('hrsh7th/cmp-path')
+Plug ('hrsh7th/cmp-cmdline')
+Plug ('hrsh7th/cmp-calc')
+Plug ('hrsh7th/nvim-cmp', {['sources'] = {
+    {
+        name = "latex_symbols",
+        options = {
+            strategy = 0, -- mixed
+        },
+    },
+
+}})
 
 -- THEME
 Plug('ellisonleao/gruvbox.nvim')
@@ -71,14 +92,20 @@ require("luasnip").config.set_config({
     enable_autosnippets = true,
 })
 
-vim.cmd[[
-" Use Tab to expand and jump through snippets
-imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>' 
-smap <silent><expr> <Tab> luasnip#jumpable(1) ? '<Plug>luasnip-jump-next' : '<Tab>'
+--vim.cmd[[
+--" Use Tab to expand and jump through snippets
+--imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>' 
+--smap <silent><expr> <Tab> luasnip#jumpable(1) ? '<Plug>luasnip-jump-next' : '<Tab>'
 
-" Use Shift-Tab to jump backwards through snippets
-imap <silent><expr> <S-Tab> luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '<S-Tab>'
-smap <silent><expr> <S-Tab> luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '<S-Tab>'
+--" Use Shift-Tab to jump backwards through snippets
+--imap <silent><expr> <S-Tab> luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '<S-Tab>'
+--smap <silent><expr> <S-Tab> luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '<S-Tab>'
+--]]
+
+-- TODO: Add support for table-based snippets
+vim.cmd[[
+" Add shift-tab functionality for insert mode
+inoremap <S-Tab> <C-d> 
 ]]
 
 -- Configure VimTex
