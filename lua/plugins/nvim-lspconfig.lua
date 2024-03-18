@@ -34,6 +34,8 @@ require('cmp').setup({
 local servers = {
     'lua_ls',
     'asm_lsp',
+    'clangd',
+    'jdtls',
 }
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -60,4 +62,12 @@ lspconfig['lua_ls'].setup {
             }
         }
     }
+}
+
+lspconfig['clangd'].setup {
+    on_attach = function(client, bufnr)
+        client.server_capabilities.signatureHelpProvider = false
+        on_attach(client, bufnr)
+    end,
+    capabilities = capabilities
 }

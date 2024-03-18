@@ -7,6 +7,7 @@ vim.g.mapleader = " "
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.opt.termguicolors = true
+vim.lsp.set_log_level("trace")
 
 vim.call('plug#begin')
 
@@ -27,9 +28,9 @@ Plug('kyazdani42/nvim-web-devicons')
 Plug('kyazdani42/nvim-tree.lua')
 
 -- LSP
-Plug('neovim/nvim-lspconfig')
 Plug('williamboman/mason.nvim')
 Plug('williamboman/mason-lspconfig.nvim')
+Plug('neovim/nvim-lspconfig')
 Plug('nvim-lua/lsp-status.nvim')
 Plug('nvim-treesitter/nvim-treesitter', {['do'] = ':TSUpdate'})
 Plug('simrat39/rust-tools.nvim')
