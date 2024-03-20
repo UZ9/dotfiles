@@ -35,7 +35,6 @@ local servers = {
     'lua_ls',
     'asm_lsp',
     'clangd',
-    'jdtls',
 }
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()

@@ -1,6 +1,5 @@
 -- VIMPLUG ALIASES
 local vim = vim
-local Plug = vim.fn['plug#']
 
 -- ESSENTIAL CONFIG VARIABLES
 vim.g.mapleader = " "
@@ -8,60 +7,100 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.opt.termguicolors = true
 vim.lsp.set_log_level("trace")
+vim.opt.fillchars = {eob = " "}
 
-vim.call('plug#begin')
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+
+vim.opt.rtp:prepend(lazypath)
 
 -- INITIALIZE PLUGINS
 
--- Snippets
-Plug('L3MON4D3/LuaSnip', { ['tag'] = 'v2.*', ['do'] = 'make install_jsregexp'})
-
--- LaTeX
-Plug('lervag/vimtex')
-
--- Telescope search
-Plug('nvim-lua/plenary.nvim')
-Plug('nvim-telescope/telescope.nvim')
-
--- nvim-tree
-Plug('kyazdani42/nvim-web-devicons')
-Plug('kyazdani42/nvim-tree.lua')
-
--- LSP
-Plug('williamboman/mason.nvim')
-Plug('williamboman/mason-lspconfig.nvim')
-Plug('neovim/nvim-lspconfig')
-Plug('nvim-lua/lsp-status.nvim')
-Plug('nvim-treesitter/nvim-treesitter', {['do'] = ':TSUpdate'})
-Plug('simrat39/rust-tools.nvim')
-
--- LaTeX-specific autocomplete
-Plug ("kdheepak/cmp-latex-symbols")
-
--- Autocompletion
-Plug ('hrsh7th/cmp-nvim-lsp')
-Plug ('hrsh7th/cmp-nvim-lua')
-Plug ('hrsh7th/cmp-buffer')
-Plug ('hrsh7th/cmp-path')
-Plug ('hrsh7th/cmp-cmdline')
-Plug ('hrsh7th/cmp-calc')
-Plug ('hrsh7th/nvim-cmp', {['sources'] = {
+local plugins = {
     {
-        name = "latex_symbols",
-        options = {
-            strategy = 0, -- mixed
-        },
+        "L3MON4D3/LuaSnip",
+        version = "v2.*",
+        build = "make install_jsregexp"
     },
+    {
+        "lervag/vimtex"
+    },
+    {
+        "nvim-lua/plenary.nvim"
+    },
+    {
+        "nvim-telescope/telescope.nvim"
+    },
+    {
+        "kyazdani42/nvim-web-devicons"
+    },
+    {
+        "kyazdani42/nvim-tree.lua"
+    },
+    {
+        "eandrju/cellular-automaton.nvim"
+    },
+    {
+        "williamboman/mason.nvim"
+    },
+    {
+        "williamboman/mason-lspconfig.nvim"
+    },
+    {
+        "neovim/nvim-lspconfig"
+    },
+    {
+        "nvim-lua/lsp-status.nvim"
+    },
+    {
+        "nvim-treesitter/nvim-treesitter", 
+        build=":TSUpdate"
+    },
+    {
+        "simrat39/rust-tools.nvim"
+    },
+    {
+        "kdheepak/cmp-latex-symbols"
+    },
+    {
+        "nvim-lualine/lualine.nvim"
+    },
+    {
+        "rstacruz/vim-closer"
+    },
+    "hrsh7th/cmp-nvim-lsp",
+    "hrsh7th/cmp-nvim-lua",
+    "hrsh7th/cmp-buffer",
+    "hrsh7th/cmp-path",
+    "hrsh7th/cmp-cmdline",
+    "hrsh7th/cmp-calc",
+    {
+        "hrsh7th/nvim-cmp",
+        sources = {
+            name = "latex_symbols",
+            options = {
+                strategy = 0, -- mixed
+            },
+        }
+    },
+    "dstein64/vim-startuptime",
+    "ful1e5/onedark.nvim"
+}
 
-}})
 
--- THEME
-Plug('ellisonleao/gruvbox.nvim')
+require("lazy").setup(plugins)
 
-vim.call('plug#end')
-
-vim.o.background = 'dark'
-vim.cmd([[colorscheme gruvbox]])
+require('onedark').setup()
 
 -- CONFIGURE PLUGINS
 require('plugins')
@@ -78,36 +117,20 @@ set.conceallevel = 2
 
 set.number = true
 
--- Configure telescope 
--- local builtin = require('telescope.builtin')
-
 -- Initialize LuaSnip
 require("luasnip.loaders.from_lua").load({paths = "./LuaSnip"})
-
---vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
---vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
---vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
---vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
 require("luasnip").config.set_config({
     enable_autosnippets = true,
 })
-
---vim.cmd[[
---" Use Tab to expand and jump through snippets
---imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>' 
---smap <silent><expr> <Tab> luasnip#jumpable(1) ? '<Plug>luasnip-jump-next' : '<Tab>'
-
---" Use Shift-Tab to jump backwards through snippets
---imap <silent><expr> <S-Tab> luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '<S-Tab>'
---smap <silent><expr> <S-Tab> luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '<S-Tab>'
---]]
 
 -- TODO: Add support for table-based snippets
 vim.cmd[[
 " Add shift-tab functionality for insert mode
 inoremap <S-Tab> <C-d> 
 ]]
+
+vim.keymap.set("n", "<leader>fml", "<cmd>CellularAutomaton make_it_rain<CR>")
 
 -- Configure VimTex
 vim.g.vimtex_complete_close_braces = 1
@@ -116,3 +139,10 @@ vim.g.vimtex_quickfix_open_on_warning = 0
 vim.g.tex_conceal = 'abdmgs'
 
 vim.g.vimtex_view_general_options = '-reuse-instance -forward-search @tex @line @pdf'
+
+-- Initialize lualine
+require('lualine').setup {
+    options = {
+        theme = "onedark-nvim"
+    }
+}
