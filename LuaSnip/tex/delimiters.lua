@@ -5,7 +5,47 @@ local function math()
     return vim.api.nvim_eval('vimtex#syntax#in_mathzone()') == 1
 end
 
+-- dynamic matrix 
+local mat = function(args, snip)
+	local rows = tonumber(snip.captures[2])
+    local cols = tonumber(snip.captures[3])
+	local nodes = {}
+	local ins_indx = 1
+	for j = 1, rows do
+		table.insert(nodes, r(ins_indx, tostring(j).."x1", i(1)))
+		ins_indx = ins_indx+1
+		for k = 2, cols do
+			table.insert(nodes, t" & ")
+			table.insert(nodes, r(ins_indx, tostring(j).."x"..tostring(k), i(1)))
+			ins_indx = ins_indx+1
+		end
+		table.insert(nodes, t{"\\\\", ""})
+	end
+	return sn(nil, nodes)
+end
+
+-- full snippet
+
+
+
 return {
+    s({ trig='([bBpvV])mat(%d+)x(%d+)([ar])', regTrig=true, name='matrix', dscr='matrix trigger lets go'},
+        fmt([[
+        \begin{<>}<>
+        <>
+        \end{<>}]],
+        { f(function (_, snip) return snip.captures[0] .. "matrix" end),
+        f(function (_, snip) -- augments
+            if snip.captures[3] == "a" then
+                out = string.rep("c", tonumber(snip.captures[2]) - 1)
+                return "[" .. out .. "|c]"
+            end
+            return ""
+    end),
+    d(0, mat),
+    f(function (_, snip) return snip.captures[0] .. "matrix" end)},
+    { delimiters='<>' }
+    )),
     s({ trig="not", snippetType="autosnippet" },
         { t("\\lnot") },
         { condition = math }
