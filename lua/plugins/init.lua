@@ -1,5 +1,17 @@
-local saturn = {
+local quotes = {
+  "If anyone here believes in telekinesis, raise my hand.",
+  "I can resist everything except temptation",
+  "Jazz isn't dead, it just smells funny",
+  "What are you DOING?",
+  "Anywhere is walking distance if you've got the time",
+  "I was hustled, scammed, bamboozled, hood winked, and lead astray"
 }
+
+local function get_quote()
+  -- Switch up seed, as it seems to be seeded by default for nvim
+  math.randomseed(os.time());
+  return quotes[math.random(1, #quotes)]
+end
 
 return {
   {
@@ -35,12 +47,25 @@ return {
             [[ YMMMUP^                                        ]],
             [[  ^^                                            ]],
             [[                                                ]],
+            [[                                                ]],
+            " ▄████████  ▄██████▄     ▄████████   ▄▄▄▄███▄▄▄▄    ▄██████▄     ▄████████ ",
+            "███    ███ ███    ███   ███    ███ ▄██▀▀▀███▀▀▀██▄ ███    ███   ███    ███ ",
+            "███    █▀  ███    ███   ███    █▀  ███   ███   ███ ███    ███   ███    █▀  ",
+            "███        ███    ███   ███        ███   ███   ███ ███    ███   ███        ",
+            "███        ███    ███ ▀███████████ ███   ███   ███ ███    ███ ▀███████████ ",
+            "███    █▄  ███    ███          ███ ███   ███   ███ ███    ███          ███ ",
+            "███    ███ ███    ███    ▄█    ███ ███   ███   ███ ███    ███    ▄█    ███ ",
+            "████████▀   ▀██████▀   ▄████████▀   ▀█   ███   █▀   ▀██████▀   ▄████████▀  ",
+            [[                                                ]],
+            [[                                                ]],
+            [[                                                ]],
+
           },
           center = {
             {
               icon = "",
               icon_hl = "group",
-              desc = "",
+              desc = "\"" .. get_quote() .. "\"",
               desc_hl = "group",
               -- key = 'shortcut key in dashboard buffer',
               key_hl = "group",
