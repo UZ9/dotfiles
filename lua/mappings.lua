@@ -1,13 +1,10 @@
+require "nvchad.mappings"
+
+-- add yours here
+
 local map = vim.keymap.set
-local opts = { noremap = true, silent = true }
 
--- Nvim tree navigation
-map('n', '<leader>tt', '<Cmd>NvimTreeToggle<CR>', opts)
-map('n', '<leader>tr', '<Cmd>NvimTreeRefresh<CR>', opts)
+map("n", ";", ":", { desc = "CMD enter command mode" })
+map("i", "jk", "<ESC>")
 
--- Telescope navigation
-local telescope = require('telescope.builtin')
-
-map('n', '<leader>ff', telescope.find_files, opts)
-map('n', '<leader>gr', telescope.live_grep, opts)
-map('n', '<leader>gf', telescope.git_files, opts)
+-- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
