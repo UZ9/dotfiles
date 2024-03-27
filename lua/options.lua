@@ -3,8 +3,18 @@ require "nvchad.options"
 -- -- Additional Configurations
 vim.opt.conceallevel = 2
 
+-- Force relative number
+vim.wo.relativenumber = true
 
+-- Initialize LuaSnip
+require("luasnip.loaders.from_lua").load({paths = "./lua_snippets"})
 
+require("luasnip").config.set_config({
+    enable_autosnippets = true,
+})
+
+-- Load in snippets
+-- vim.g.lua_snippets_path = vim.fn.stdpath "config" .. "/lua/snippets"
 
 local alpha = function()
   return string.format("%x", math.floor(255 * (vim.g.transparency or 0.8)))
@@ -17,5 +27,3 @@ if vim.g.neovide then
   vim.g.neovide_background_color = "#0f1117" .. alpha()
   vim.g.neovide_cursor_vfx_mode = "pixiedust"
 end
--- local o = vim.o
--- o.cursorlineopt ='both' -- to enable cursorline!
