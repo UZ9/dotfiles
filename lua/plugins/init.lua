@@ -21,63 +21,6 @@ return {
       require "configs.conform"
     end,
   },
-  -- {
-  --   "glepnir/dashboard-nvim",
-  --   event = "VimEnter",
-  --   config = function()
-  --     require("dashboard").setup {
-  --       theme = "doom",
-  --       config = {
-  --         disable_move = false,
-  --         header = {
-  --           [[                                                ]],
-  --           [[                                          _.oo. ]],
-  --           [[                  _.u[[/;:,.         .odMMMMMM' ]],
-  --           [[               .o888UU[[[/;:-.  .o@P^    MMM^   ]],
-  --           [[              oN88888UU[[[/;::-.        dP^     ]],
-  --           [[             dNMMNN888UU[[[/;:--.   .o@P^       ]],
-  --           [[            ,MMMMMMN888UU[[/;::-. o@^           ]],
-  --           [[            NNMMMNN888UU[[[/~.o@P^              ]],
-  --           [[            888888888UU[[[/o@^-..               ]],
-  --           [[           oI8888UU[[[/o@P^:--..                ]],
-  --           [[        .@^  YUU[[[/o@^;::---..                 ]],
-  --           [[      oMP     ^/o@P^;:::---..                   ]],
-  --           [[   .dMMM    .o@^ ^;::---...                     ]],
-  --           [[  dMMMMMMM@^`       `^^^^                       ]],
-  --           [[ YMMMUP^                                        ]],
-  --           [[  ^^                                            ]],
-  --           [[                                                ]],
-  --           [[                                                ]],
-  --           " ▄████████  ▄██████▄     ▄████████   ▄▄▄▄███▄▄▄▄    ▄██████▄     ▄████████ ",
-  --           "███    ███ ███    ███   ███    ███ ▄██▀▀▀███▀▀▀██▄ ███    ███   ███    ███ ",
-  --           "███    █▀  ███    ███   ███    █▀  ███   ███   ███ ███    ███   ███    █▀  ",
-  --           "███        ███    ███   ███        ███   ███   ███ ███    ███   ███        ",
-  --           "███        ███    ███ ▀███████████ ███   ███   ███ ███    ███ ▀███████████ ",
-  --           "███    █▄  ███    ███          ███ ███   ███   ███ ███    ███          ███ ",
-  --           "███    ███ ███    ███    ▄█    ███ ███   ███   ███ ███    ███    ▄█    ███ ",
-  --           "████████▀   ▀██████▀   ▄████████▀   ▀█   ███   █▀   ▀██████▀   ▄████████▀  ",
-  --           [[                                                ]],
-  --           [[                                                ]],
-  --           [[                                                ]],
-  --         },
-  --         center = {
-  --           {
-  --             icon = "",
-  --             icon_hl = "group",
-  --             desc = '"' .. get_quote() .. '"',
-  --             desc_hl = "group",
-  --             -- key = 'shortcut key in dashboard buffer',
-  --             key_hl = "group",
-  --             action = "",
-  --           },
-  --         },
-  --         footer = {}, --your footer
-  --       },
-  --     }
-  --   end,
-  --   dependencies = { { "nvim-tree/nvim-web-devicons" } },
-  -- },
-
   {
     "neovim/nvim-lspconfig",
     config = function()
@@ -122,26 +65,13 @@ return {
       }
     end,
   },
-  -- {
-  -- 	"nvim-treesitter/nvim-treesitter",
-  -- 	opts = {
-  -- 		ensure_installed = {
-  -- 			"vim",
-  --       "lua",
-  --       "vimdoc",
-  --       "html",
-  --       "css",
-  --       -- Java
-  --       "java-language-server",
-  --       "jdtls"
-  -- 		},
-  --     highlight = {
-  --       enable = true,
-  --       additional_vim_regex_highlighting = false,
-  --     },
-  --     indent = {
-  --       enable = true
-  --     }
-  -- 	},
-  -- },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    config = function(_, opts)
+      dofile(vim.g.base46_cache .. "syntax")
+      require("nvim-treesitter.configs").setup(opts)
+
+      vim.treesitter.language.register('markdown', 'mdx')
+    end,
+  }
 }
