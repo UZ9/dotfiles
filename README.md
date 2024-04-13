@@ -1,2 +1,2 @@
-# starter
-Starter config for NvChad
+# nvim-config
+My personal nvim config.
