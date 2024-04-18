@@ -16,7 +16,6 @@ end
 return {
   {
     "stevearc/conform.nvim",
-    -- event = 'BufWritePre' -- uncomment for format on save
     config = function()
       require "configs.conform"
     end,
@@ -41,7 +40,6 @@ return {
         "typescript-language-server",
         "rls",
         "clangd",
-        -- java
         "java-language-server",
         "jdtls",
       },
@@ -71,7 +69,7 @@ return {
       dofile(vim.g.base46_cache .. "syntax")
       require("nvim-treesitter.configs").setup(opts)
 
-      vim.treesitter.language.register('markdown', 'mdx')
+      vim.treesitter.language.register("markdown", "mdx")
     end,
-  }
+  },
 }
