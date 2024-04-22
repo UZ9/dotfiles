@@ -13,8 +13,11 @@ require("luasnip").config.set_config({
     enable_autosnippets = true,
 })
 
+print("Hello")
+print(vim.fn.stdpath "config" .. "/lua_snippets")
+
 -- Load in snippets
-vim.g.lua_snippets_path = vim.fn.stdpath "config" .. "/lua/snippets"
+vim.g.lua_snippets_path = vim.fn.stdpath "config" .. "\\lua" .. "\\lua_snippets"
 
 local alpha = function()
   return string.format("%x", math.floor(255 * (vim.g.transparency or 0.8)))

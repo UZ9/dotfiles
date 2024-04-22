@@ -27,7 +27,20 @@ return {
       require "configs.lspconfig"
     end,
   },
-
+  {
+    "lervag/vimtex"
+  },
+  {
+    "NvChad/ui",
+    dependencies = {
+      "abeldekat/harpoonline",
+      config = function()
+        require("harpoonline").setup {
+          on_update = function() vim.cmd.redrawstatus() end,
+        }
+      end,
+    },
+  },
   {
     "williamboman/mason.nvim",
     opts = {
