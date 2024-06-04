@@ -46,8 +46,3 @@ local opts = {
     },
   },
 }
-
--- rusttools
-local rt = require("rust-tools")
-
-rt.setup(opts)
