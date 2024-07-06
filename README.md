@@ -1,2 +1,2 @@
-# nvim-config
-My personal nvim config.
+# dotfiles
+My personal configuration files.
