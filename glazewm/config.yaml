@@ -131,17 +131,17 @@ bar:
 
 workspaces:
   - name: "1"
-    display_name: " 󰣇"
+    display_name: " "
     keep_alive: true
     bind_to_monitor: 2
   - name: "2"
-    display_name: " 󰇩 "
+    display_name: " "
     keep_alive: true
   - name: "3"
-    display_name: " "
+    display_name: "󰇩 "
     keep_alive: true
   - name: "4"
-    display_name: "󰊻 "
+    display_name: "󱁊 "
     keep_alive: true
   - name: "5"
     display_name: " "
