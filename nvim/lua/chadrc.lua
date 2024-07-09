@@ -2,9 +2,9 @@
 local M = {}
 
 M.ui = {
-  theme = "gruvchad",
+  theme = "everforest",
   transparency = true,
-  theme_toggle = { "gruvchad", "one_light" },
+  theme_toggle = { "everforest", "one_light" },
   lsp_semantic_tokens = true,
   statusline = {
     theme = "vscode_colored",

@@ -15,6 +15,11 @@ end
 
 return {
   {
+    "mrcjkb/rustaceanvim",
+    version = '^4',
+    lazy = false -- already lazy
+  },
+  {
     "stevearc/conform.nvim",
     config = function()
       require "configs.conform"
@@ -28,7 +33,17 @@ return {
     end,
   },
   {
-    "lervag/vimtex"
+    -- Custom local plugin
+    dir = "C:\\Users\\ryder\\Documents\\Code\\latex-drawings.nvim",
+    lazy = false,
+    opts = {
+      name = "Ryder",
+    },
+    dependencies = { "nvim-telescope/telescope.nvim" }
+  },
+  {
+    "lervag/vimtex",
+    lazy = false
   },
   {
     "NvChad/ui",
@@ -36,7 +51,9 @@ return {
       "abeldekat/harpoonline",
       config = function()
         require("harpoonline").setup {
-          on_update = function() vim.cmd.redrawstatus() end,
+          on_update = function()
+            vim.cmd.redrawstatus()
+          end,
         }
       end,
     },
@@ -75,6 +92,7 @@ return {
         },
       }
     end,
+    d,
   },
   {
     "nvim-treesitter/nvim-treesitter",
@@ -83,6 +101,27 @@ return {
       require("nvim-treesitter.configs").setup(opts)
 
       vim.treesitter.language.register("markdown", "mdx")
+    end,
+  },
+  {
+    "folke/which-key.nvim",
+    config = function(_, opts)
+      dofile(vim.g.base46_cache .. "whichkey")
+      require("which-key").setup(opts)
+      local present, wk = pcall(require, "which-key")
+      if not present then
+        return
+      end
+
+      local latexdrawings = require "latexdrawings"
+
+      wk.register {
+        -- add group
+        ["<leader>rs"] = { "<cmd>BeginDrawing<cr>", "Begin Drawing" },
+      }
+    end,
+    setup = function()
+      require("core.utils").load_mappings "whichkey"
     end,
   },
 }
