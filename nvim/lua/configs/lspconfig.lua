@@ -4,7 +4,7 @@ local on_init = require("nvchad.configs.lspconfig").on_init
 local capabilities = require("nvchad.configs.lspconfig").capabilities
 
 local lspconfig = require "lspconfig"
-local servers = { "html", "cssls", "jdtls", "tsserver", "clangd", "rust_analyzer" }
+local servers = { "html", "cssls", "jdtls", "tsserver", "clangd" }
 
 -- lsps with default config
 for _, lsp in ipairs(servers) do
@@ -32,17 +32,6 @@ local opts = {
       show_parameter_hints = false,
       parameter_hints_prefix = "",
       other_hints_prefix = "",
-    },
-  },
-
-  server = {
-    on_attach = on_attach,
-    settings = {
-      ["rust-analyzer"] = {
-        checkOnSave = {
-          command = "clippy",
-        },
-      },
     },
   },
 }

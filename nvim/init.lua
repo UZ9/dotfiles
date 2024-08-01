@@ -1,7 +1,7 @@
 vim.g.base46_cache = vim.fn.stdpath "data" .. "/nvchad/base46/"
 vim.g.mapleader = " "
 
-vim.api.nvim_set_hl(0, "DashboardHeader", { fg='#e85a43' } )
+vim.api.nvim_set_hl(0, "DashboardHeader", { fg = "#e85a43" })
 
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 
@@ -12,12 +12,12 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
--- Add filetype of vim
-vim.filetype.add({
+--  Add filetype of vim
+vim.filetype.add {
   extension = {
-    mdx = 'mdx'
-  }
-})
+    mdx = "mdx",
+  },
+}
 
 local lazy_config = require "configs.lazy"
 

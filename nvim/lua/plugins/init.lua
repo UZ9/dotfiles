@@ -1,18 +1,3 @@
-local quotes = {
-  "If anyone here believes in telekinesis, raise my hand.",
-  "I can resist everything except temptation",
-  "Jazz isn't dead, it just smells funny",
-  "What are you DOING?",
-  "Anywhere is walking distance if you've got the time",
-  "I was hustled, scammed, bamboozled, hood winked, and lead astray",
-}
-
-local function get_quote()
-  -- Switch up seed, as it seems to be seeded by default for nvim
-  math.randomseed(os.time())
-  return quotes[math.random(1, #quotes)]
-end
-
 return {
   {
     "mrcjkb/rustaceanvim",
@@ -31,15 +16,6 @@ return {
       require("nvchad.configs.lspconfig").defaults()
       require "configs.lspconfig"
     end,
-  },
-  {
-    -- Custom local plugin
-    dir = "C:\\Users\\ryder\\Documents\\Code\\latex-drawings.nvim",
-    lazy = false,
-    opts = {
-      name = "Ryder",
-    },
-    dependencies = { "nvim-telescope/telescope.nvim" }
   },
   {
     "lervag/vimtex",
@@ -76,10 +52,6 @@ return {
     },
   },
   {
-    "charludo/projectmgr.nvim",
-    lazy = false,
-  },
-  {
     "nvimtools/none-ls.nvim",
     config = function()
       local null_ls = require "null-ls"
@@ -92,7 +64,6 @@ return {
         },
       }
     end,
-    d,
   },
   {
     "nvim-treesitter/nvim-treesitter",
@@ -104,24 +75,79 @@ return {
     end,
   },
   {
-    "folke/which-key.nvim",
-    config = function(_, opts)
-      dofile(vim.g.base46_cache .. "whichkey")
-      require("which-key").setup(opts)
-      local present, wk = pcall(require, "which-key")
-      if not present then
-        return
-      end
-
-      local latexdrawings = require "latexdrawings"
-
-      wk.register {
-        -- add group
-        ["<leader>rs"] = { "<cmd>BeginDrawing<cr>", "Begin Drawing" },
-      }
-    end,
-    setup = function()
-      require("core.utils").load_mappings "whichkey"
-    end,
+    "mrcjkb/rustaceanvim",
+    version = "^4", -- Recommended
+    ft = { "rust" },
+    opts = {
+      server = {
+        on_attach = function(_, bufnr)
+          vim.keymap.set("n", "<leader>cR", function()
+            vim.cmd.RustLsp "codeAction"
+          end, { desc = "Code Action", buffer = bufnr })
+          vim.keymap.set("n", "<leader>dr", function()
+            vim.cmd.RustLsp "debuggables"
+          end, { desc = "Rust Debuggables", buffer = bufnr })
+        end,
+        default_settings = {
+          -- rust-analyzer language server configuration
+          ["rust-analyzer"] = {
+            cargo = {
+              allFeatures = true,
+              loadOutDirsFromCheck = true,
+              buildScripts = {
+                enable = true,
+              },
+            },
+            -- Add clippy lints for Rust.
+            checkOnSave = true,
+            procMacro = {
+              enable = true,
+              ignored = {
+                ["async-trait"] = { "async_trait" },
+                ["napi-derive"] = { "napi" },
+                ["async-recursion"] = { "async_recursion" },
+              },
+            },
+          },
+        },
+      },
+    },
   },
+  {
+    "folke/trouble.nvim",
+    opts = {}, -- for default options, refer to the configuration section for custom setup.
+    cmd = "Trouble",
+    keys = {
+      {
+        "<leader>xx",
+        "<cmd>Trouble diagnostics toggle<cr>",
+        desc = "Diagnostics (Trouble)",
+      },
+      {
+        "<leader>xX",
+        "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+        desc = "Buffer Diagnostics (Trouble)",
+      },
+      {
+        "<leader>cs",
+        "<cmd>Trouble symbols toggle focus=false<cr>",
+        desc = "Symbols (Trouble)",
+      },
+      {
+        "<leader>cl",
+        "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+        desc = "LSP Definitions / references / ... (Trouble)",
+      },
+      {
+        "<leader>xL",
+        "<cmd>Trouble loclist toggle<cr>",
+        desc = "Location List (Trouble)",
+      },
+      {
+        "<leader>xQ",
+        "<cmd>Trouble qflist toggle<cr>",
+        desc = "Quickfix List (Trouble)",
+      },
+    },
+  }
 }
