@@ -12,6 +12,9 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
+-- Reduce latency when typing 
+vim.opt.ttimeoutlen = 0
+
 --  Add filetype of vim
 vim.filetype.add {
   extension = {

@@ -3,14 +3,13 @@ export ZSH="$HOME/.oh-my-zsh/"
 
 ZSH_THEME="robbyrussell"
 
+KEY_TIMEOUT=1
 # Vim keybindings
 bindkey -v
 
-# Commented out as installation currently depends on distro, want to make an automated installation instead
-# plugins=(git zsh-syntax-highlighting)
+plugins+=(vi-mode)
 
 source $ZSH/oh-my-zsh.sh 
-# source "$HOME/.bashrc"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
