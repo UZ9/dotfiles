@@ -1,10 +1,5 @@
 return {
   {
-    "mrcjkb/rustaceanvim",
-    version = '^4',
-    lazy = false -- already lazy
-  },
-  {
     "stevearc/conform.nvim",
     config = function()
       require "configs.conform"
