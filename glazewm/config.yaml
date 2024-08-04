@@ -161,13 +161,13 @@ workspaces:
     keep_alive: true
 
 window_rules:
-  # Task Manager requires admin privileges, ignore 
+  # Task Manager requires admin privileges, ignore
   - command: "ignore"
     match_process_name: "/Taskmgr/ScreenClippingHost/"
   # Move spotify to music tab
   - command: "move to workspace 8"
     match_process_name: "Spotify"
-  # Move discord to discord tab 
+  # Move discord to discord tab
   - command: "move to workspace 7"
     match_process_name: "Discord"
   - command: "move to workspace 9"
@@ -264,7 +264,7 @@ keybindings:
   - command: "reload config"
     binding: "Alt+Shift+R"
 
-  # Launch windows terminal 
+  # Launch windows terminal
   - command: "exec wt"
     binding: "Alt+Enter"
 

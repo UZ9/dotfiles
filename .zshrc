@@ -3,6 +3,9 @@ export ZSH="$HOME/.oh-my-zsh/"
 
 ZSH_THEME="robbyrussell"
 
+# Vim keybindings
+bindkey -v
+
 # Commented out as installation currently depends on distro, want to make an automated installation instead
 # plugins=(git zsh-syntax-highlighting)
 
@@ -13,4 +16,4 @@ source $ZSH/oh-my-zsh.sh
 
 tmux new -A -s primary
 
-export PATH="$HOME/.local/bin:~/Downloads/nvim-linux64/bin:$PATH"
+export PATH="$HOME/.yarn/bin:$HOME/.local/bin:~/Downloads/nvim-linux64/bin:$PATH"
