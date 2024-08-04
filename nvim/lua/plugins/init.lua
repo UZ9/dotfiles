@@ -14,7 +14,7 @@ return {
   },
   {
     "lervag/vimtex",
-    lazy = false
+    lazy = false,
   },
   {
     "NvChad/ui",
@@ -71,7 +71,7 @@ return {
   },
   {
     "mrcjkb/rustaceanvim",
-    version = "^4", -- Recommended
+    version = "^4",
     ft = { "rust" },
     opts = {
       server = {
@@ -84,7 +84,6 @@ return {
           end, { desc = "Rust Debuggables", buffer = bufnr })
         end,
         default_settings = {
-          -- rust-analyzer language server configuration
           ["rust-analyzer"] = {
             cargo = {
               allFeatures = true,
@@ -93,7 +92,6 @@ return {
                 enable = true,
               },
             },
-            -- Add clippy lints for Rust.
             checkOnSave = true,
             procMacro = {
               enable = true,
@@ -109,8 +107,9 @@ return {
     },
   },
   {
+    -- TODO: Move to nicer keybinds
     "folke/trouble.nvim",
-    opts = {}, -- for default options, refer to the configuration section for custom setup.
+    opts = {},
     cmd = "Trouble",
     keys = {
       {
@@ -144,5 +143,5 @@ return {
         desc = "Quickfix List (Trouble)",
       },
     },
-  }
+  },
 }

@@ -7,11 +7,11 @@ vim.opt.conceallevel = 2
 vim.wo.relativenumber = true
 
 -- Initialize LuaSnip
-require("luasnip.loaders.from_lua").load({paths = "./lua_snippets"})
+require("luasnip.loaders.from_lua").load { paths = "./lua_snippets" }
 
-require("luasnip").config.set_config({
-    enable_autosnippets = true,
-})
+require("luasnip").config.set_config {
+  enable_autosnippets = true,
+}
 
 -- Load in snippets
 vim.g.lua_snippets_path = vim.fn.stdpath "config" .. "\\lua" .. "\\lua_snippets"
