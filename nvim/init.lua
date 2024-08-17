@@ -12,7 +12,7 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
--- Reduce latency when typing 
+-- Reduce latency when typing
 vim.opt.ttimeoutlen = 0
 
 --  Add filetype of vim
@@ -48,3 +48,13 @@ require "nvchad.autocmds"
 vim.schedule(function()
   require "mappings"
 end)
+
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+  border = "rounded",
+  width = 80,
+})
+
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+  border = "rounded",
+  width = 80,
+})
