@@ -1,4 +1,21 @@
-# export PATH="$PATH:$HOME/bin:$HOME:$HOME/Downloads/Downloads/nvim-linux64/bin:$HOME/.local/bin:/usr/local/bin"
+setopt extended_glob null_glob
+
+path=(
+  $path
+  $HOME/bin
+  $HOME/.local/bin 
+  $HOME/.yarn/bin 
+  $HOME/Downloads/nvim-linux64/bin 
+  $HOME/Downloads/clang+llvm-17.0.6-x86_64-linux-gnu-ubuntu-22.04/bin
+  /bin
+)
+
+typeset -U path
+path=($^path(N-/))
+
+export PATH
+
+
 export ZSH="$HOME/.oh-my-zsh/"
 
 ZSH_THEME="robbyrussell"
@@ -10,14 +27,7 @@ bindkey -v
 plugins+=(vi-mode)
 
 source $ZSH/oh-my-zsh.sh 
-alias tmux="TERM=screen-256color-bce tmux"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 tmux new -A -s primary
-
-notes () {
-  nvim ~/notes.md
-}
-
-export PATH="$HOME/.yarn/bin:$HOME/.local/bin:~/Downloads/nvim-linux64/bin:$PATH"
