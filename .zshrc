@@ -58,4 +58,4 @@ plugins+=(vi-mode)
 # ------------------ TMUX Configuration ------------------
 
 # Automatically start a new tmux session when starting zsh
-tmux new -A -s primary
+# tmux new -A -s primary

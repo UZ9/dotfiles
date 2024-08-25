@@ -7,6 +7,7 @@ return {
   },
   {
     "neovim/nvim-lspconfig",
+    cmd = { "LspInfo", "LspInstall", "LspUninstall" },
     config = function()
       require("nvchad.configs.lspconfig").defaults()
       require "configs.lspconfig"
@@ -16,6 +17,7 @@ return {
     "lervag/vimtex",
     lazy = false,
   },
+  -- TODO: Harpoon editing functionality
   {
     "theprimeagen/harpoon",
     branch = "harpoon2",
@@ -90,6 +92,12 @@ return {
         "clangd",
         "java-language-server",
         "jdtls",
+
+        -- C++ specific
+        "clangd",
+        "clang-format",
+        "cmake-language-server",
+        "cpptools",
       },
     },
   },
@@ -101,6 +109,7 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter",
+    dependencies = { "neovim/nvim-lspconfig" },
     config = function(_, opts)
       dofile(vim.g.base46_cache .. "syntax")
       require("nvim-treesitter.configs").setup(opts)
@@ -191,5 +200,17 @@ return {
     "romgrk/todoist.nvim",
     cmd = "Todoist",
     lazy = false,
+  },
+  {
+    -- TODO: Set lazy configuration to trigger on certain files?
+    "mfussenegger/nvim-dap",
+    config = function()
+      require "configs.dap"
+    end,
+    lazy = false,
+  },
+  {
+    "rcarriga/nvim-dap-ui",
+    dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
   },
 }
