@@ -1,4 +1,4 @@
----@type NvPluginSpec
+---@type LazyPluginSpec
 return {
   "mrcjkb/rustaceanvim",
   version = "^4",
