@@ -1,3 +1,8 @@
+# ------------------ Configure P10K ------------------
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # ------------------ Path Configuration ------------------
 
 
@@ -43,19 +48,26 @@ alias dot='cd $HOME/ConfigCode/dotfiles'
 alias ls='ls --color=auto'
 alias la='ls -lathr'
 
-# ------------------ Sourcing ------------------
-source $ZSH/oh-my-zsh.sh 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # ------------------ Theme Settings ------------------
-ZSH_THEME="robbyrussell"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 bindkey -v
 
 # ------------------ Plugins ------------------
 plugins+=(vi-mode)
 
+# ------------------ Sourcing ------------------
+source $ZSH/oh-my-zsh.sh 
+
+# Fuzzy finding
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh 
+
+# P10K
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
 
 # ------------------ TMUX Configuration ------------------
 
 # Automatically start a new tmux session when starting zsh
 # tmux new -A -s primary
+
