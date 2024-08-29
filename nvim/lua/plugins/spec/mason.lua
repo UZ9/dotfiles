@@ -19,6 +19,16 @@ return {
       "clang-format",
       "cmake-language-server",
       "cpptools",
+
+      -- Rust specific
+      "rust-analyzer",
+
+      -- Shell checks
+      "shellcheck",
+
+      -- YAML
+      "yamlfix",
+      "yaml-language-server"
     },
   },
 }
