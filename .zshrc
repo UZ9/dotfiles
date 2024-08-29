@@ -62,6 +62,8 @@ source $ZSH/oh-my-zsh.sh
 # Fuzzy finding
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh 
 
+
+# ------------------ P10K ------------------
 # P10K
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
@@ -71,3 +73,7 @@ source $ZSH/oh-my-zsh.sh
 # Automatically start a new tmux session when starting zsh
 # tmux new -A -s primary
 
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
