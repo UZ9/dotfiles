@@ -2,7 +2,7 @@
 
 # Adapted from Primeagen's tmux sessionizer script
 
-if [[ $# -eq 1]]; then
+if [[ $# -eq 1 ]]; then
   selected=$1
 else 
   selected=$(find ~/Code -mindepth 1 -maxdepth 1 -type d | fzf)
