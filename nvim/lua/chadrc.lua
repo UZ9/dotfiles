@@ -11,6 +11,9 @@ M.ui = {
   telescope = {
     style = "bordered",
   },
+
+  -- NOTE: MUST BE DISABLED FOR ANY SORT OF THEME
+  transparency = true
 }
 
 return M

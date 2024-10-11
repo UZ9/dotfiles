@@ -29,7 +29,7 @@ return {
     }
 
     lspconfig.bashls.setup {
-      filetypes = { "zsh", "sh" }
+      filetypes = { "zsh", "sh" },
     }
 
     lspconfig.yamlls.setup {

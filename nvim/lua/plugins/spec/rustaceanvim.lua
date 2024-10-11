@@ -3,6 +3,7 @@ return {
   "mrcjkb/rustaceanvim",
   version = "^4",
   ft = { "rust" },
+  config = function() end,
   opts = {
     server = {
       on_attach = function(_, bufnr)

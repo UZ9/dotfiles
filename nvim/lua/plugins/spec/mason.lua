@@ -28,7 +28,7 @@ return {
 
       -- YAML
       "yamlfix",
-      "yaml-language-server"
+      "yaml-language-server",
     },
   },
 }
