@@ -20,9 +20,6 @@ return {
       "cmake-language-server",
       "cpptools",
 
-      -- Rust specific
-      "rust-analyzer",
-
       -- Shell checks
       "shellcheck",
 

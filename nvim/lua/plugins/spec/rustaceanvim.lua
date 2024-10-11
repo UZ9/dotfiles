@@ -2,8 +2,12 @@
 return {
   "mrcjkb/rustaceanvim",
   version = "^4",
-  ft = { "rust" },
+  lazy = false, -- rustaceanvim is already lazy
   config = function() end,
+  keys = {
+    { "<leader>cR", "<cmd>RustLsp codeAction<cr>", desc = "Rust code action" },
+    { "<leader>dr", "<cmd>RustLsp debuggables<cr>", desc = "Rust debuggables " },
+  },
   opts = {
     server = {
       on_attach = function(_, bufnr)
