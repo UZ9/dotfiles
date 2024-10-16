@@ -8,6 +8,26 @@ return {
   end,
   keys = {
     {
+      "<C-h>",
+      function() require("harpoon"):list():select(1) end,
+      desc = "harpoon nav to file 1"
+    },
+    {
+      "<C-j>",
+      function() require("harpoon"):list():select(2) end,
+      desc = "harpoon nav to file 2"
+    },
+    {
+      "<C-k>",
+      function() require("harpoon"):list():select(3) end,
+      desc = "harpoon nav to file 3"
+    },
+    {
+      "<C-l>",
+      function() require("harpoon"):list():select(4) end,
+      desc = "harpoon nav to file 4"
+    },
+    {
       "<leader>A",
       function()
         require("harpoon"):list():add()
