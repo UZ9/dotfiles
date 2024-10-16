@@ -5,5 +5,4 @@ return {
   config = function()
     require "configs.dap"
   end,
-  lazy = false,
 }
