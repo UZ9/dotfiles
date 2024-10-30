@@ -21,5 +21,12 @@ end
 map("n", "<C-d>", execute_lazy "<C-d>zz", { desc = "Move down half a page and center" })
 map("n", "<C-b>", execute_lazy "<C-b>zz", { desc = "Move up half a page and center" })
 
+-- Quickly rearrange lines 
+map("n", "<C-k>", ":m-2<CR>")
+map("n", "<C-j>", ":m+1<CR>")
+
+map("v", "<", "<gv")
+map("v", ">", ">gv")
+
 -- Compile cmake 
 map("n", "<leader>rr", "<cmd>make -C build<cr>", { desc = "Compile CMake project" })
