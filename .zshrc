@@ -8,6 +8,9 @@ fi
 
 setopt extended_glob null_glob
 
+# CUDA
+export CUDA_HOME=/usr/local/cuda
+
 path=(
   $path
   $HOME/bin
@@ -18,10 +21,13 @@ path=(
   /bin
 )
 
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64:/usr/local/cuda/extras/CUPTI/lib64
+
 typeset -U path
 path=($^path(N-/))
 
-export PATH
+export PATH 
+export PATH=$PATH:$CUDA_HOME/bin
 
 # ------------------ Env Variables ------------------
 
@@ -67,6 +73,11 @@ bindkey -v
 # P10K
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# ------------------ Vim Configuration ------------------
+
+# Edit line in vim buffer
+autoload edit-command-line; zle -N edit-command-line 
+bindkey '^e' edit-command-line
 
 # ------------------ TMUX Configuration ------------------
 

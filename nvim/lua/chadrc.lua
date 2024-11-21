@@ -2,8 +2,8 @@
 local M = {}
 
 M.ui = {
-  theme = "bearded-arc",
-  theme_toggle = { "bearded-arc", "one_light" },
+  theme = "everforest",
+  theme_toggle = { "everforest", "one_light" },
   lsp_semantic_tokens = true,
   statusline = {
     theme = "vscode_colored",
