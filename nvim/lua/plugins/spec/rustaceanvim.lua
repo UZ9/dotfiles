@@ -1,13 +1,15 @@
 ---@type LazyPluginSpec
 return {
   "mrcjkb/rustaceanvim",
-  version = "^4",
+  version = "^5",
   lazy = false, -- rustaceanvim is already lazy
-  config = function() end,
-  keys = {
-    { "<leader>cR", "<cmd>RustLsp codeAction<cr>", desc = "Rust code action" },
-    { "<leader>dr", "<cmd>RustLsp debuggables<cr>", desc = "Rust debuggables " },
-  },
+  config = function()
+    vim.g.rustaceanvim = {
+      server = {
+        on_attach = require("nvchad.configs.lspconfig").on_attach,
+      },
+    }
+  end,
   opts = {
     server = {
       cmd = function()

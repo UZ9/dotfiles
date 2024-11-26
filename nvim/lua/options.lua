@@ -25,4 +25,8 @@ vim.filetype.add {
   extension = {
     mdx = "mdx",
   },
+  shader = "hlsl",
+  hlsl = "hlsl",
+  vertexshader = "hlsl",
+  fragmentshader = "hlsl",
 }
