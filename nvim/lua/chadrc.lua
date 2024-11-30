@@ -10,6 +10,11 @@ M.ui = {
   },
   telescope = {
     style = "bordered",
+ 
+  },
+  -- Disable tab line 
+  tabufline = {
+    enabled = false
   },
 
   -- NOTE: MUST BE DISABLED FOR ANY SORT OF THEME
