@@ -18,6 +18,7 @@ path=(
   $HOME/.yarn/bin 
   $HOME/Downloads/nvim-linux64/bin 
   $HOME/Downloads/clang+llvm-17.0.6-x86_64-linux-gnu-ubuntu-22.04/bin
+  /opt/nvim-linux64/bin
   /bin
 )
 
@@ -100,3 +101,4 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+source ~/powerlevel10k/powerlevel10k.zsh-theme
