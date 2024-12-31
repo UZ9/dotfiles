@@ -5,7 +5,7 @@ My personal configuration files.
 
 ### Problem
 
-Notes for a class are stored under my [Obsidian](https://obsidian.md/) Vault, but there are often additional non-note files required. These might be code projects, practice tests, or standalone portable programs.
+Notes for a class are stored in my [Obsidian](https://obsidian.md/) Vault, but there are often additional non-note files required. These might be code projects, practice tests, or standalone portable programs.
 
 An easy solution to this issue is to just have a folder for each class:
 
