@@ -22,7 +22,7 @@
 # if we want to a school-related topic e.g. physics,
 # split the pane, left half is showing obsidian notes 
 
-PROJECT_DIRECTORY=/tmp/schoolmanager
+PROJECT_DIRECTORY=~/Classes
 OBSIDIAN_DIRECTORY=/mnt/c/Users/chess/ObsidianVault
 OBSIDIAN_CLASSES_DIRECTORY="$OBSIDIAN_DIRECTORY/005 Classes"
 
@@ -33,15 +33,13 @@ year=$(date +%y)
 
 semester=""
 
-if [[ $month -gt 5 ]]; then
+if [[ $month -gt 5 ]] && [[ $month -lt 12 ]]; then
   semester="FALL$year"
 else
   semester="SPRING$year"
 fi
 
-
 semester_folder="$PROJECT_DIRECTORY/$semester"
-echo "$semester_folder"
 
 # create semester if not exists
 if ! [ -e "$semester_folder" ]; then 
