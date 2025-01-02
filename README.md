@@ -37,7 +37,7 @@ This inevitably has led to the very inconvenient workflow cycle of shuffling bet
 
 ### Solution
 
-I wanted a system robust enough to always provide a consistent location for notes, but give me the flexibility of adding more folders of non-note content if needed. At the end of the day, the Obsidian notes should all be grouped together, both to allow easier navigation and to allow me to access the notes from a phone:
+I wanted a system robust enough to always provide a consistent location for notes, but with the flexibility of adding more folders of non-note content if needed. At the end of the day, the Obsidian notes should all be grouped together--both to allow easier navigation and to allow me to access the notes from a phone:
 
 ```
 .
