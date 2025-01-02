@@ -30,7 +30,7 @@ However, we encounter a few issues with this approach:
 - Notes are isolated for each class, preventing [internal links](https://help.obsidian.md/Linking+notes+and+files/Internal+links) (one of the main features of Obsidian)
 - The Obsidian GUI would attempt to read all files as well
 
-This inevitably has led to the very inconvenient workflow cycle of shuffling between multiple locations for notes, and a rapidly deteriorating folder structure as the semester progresses:
+This inevitably has led to the very inconvenient workflow cycle of shuffling between multiple locations for notes, and a rapidly deteriorating folder structure as the semester progresses. Take the following as an example:
 - Lecture notes are taken in class and put in the Obsidian Vault
 - Homework assignments in latex are introduced, requiring the use of a very specific template. Obsidian is good at embedding latex snippets via [MathJax](https://www.mathjax.org/), but not when it comes to fully standalone `.tex` files. Consequently, these have to be moved to a separate folder.
 - A code-related project is introduced in the class. It doesn't make sense 
