@@ -1,4 +1,4 @@
-#!/bin/zsh 
+#!/bin/bash 
 
 # Adapted from Primeagen's tmux sessionizer script
 
@@ -14,18 +14,15 @@ fi
 
 selected_name=$(basename "$selected" | tr . _)
 
-echo $selected_name
-
 tmux_running=$(pgrep tmux)
 
 if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then 
-  tmux new-session -s $selected_name -c $selected 
+  tmux new-session -s "$selected_name" -c "$selected" 
   exit 0
 fi 
 
-echo $selected_name
-if ! tmux has-session -t=$selected_name 2> /dev/null; then
-  tmux new-session -ds $selected_name -c $selected
+if ! tmux has-session -t="$selected_name" 2> /dev/null; then
+  tmux new-session -ds "$selected_name" -c "$selected"
 fi 
 
-tmux switch-client -t $selected_name
+tmux switch-client -t "$selected_name"

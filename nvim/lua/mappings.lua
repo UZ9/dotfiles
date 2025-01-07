@@ -1,5 +1,7 @@
 require "nvchad.mappings"
 
+local utils = require("utils")
+
 local map = vim.keymap.set
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
@@ -27,6 +29,10 @@ map("n", "<C-j>", ":m+1<CR>")
 
 map("v", "<", "<gv")
 map("v", ">", ">gv")
+
+-- Execute current line in lua
+map("n", "<leader>x", "<cmd>.lua<CR>");
+map("n", "<leader><leader>x", "<cmd> source %<CR>")
 
 vim.keymap.set("n", "<leader>e", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 vim.keymap.set("n", "<Tab>", "<CMD>Oil<CR>", { desc = "Open parent directory" })

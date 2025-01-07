@@ -1,5 +1,5 @@
 --- @type LazyPluginSpec
 return {
-  dir = "~/Code/classnotes.nvim",
-  lazy = false,
+  -- dir = "~/Code/classnotes.nvim",
+  -- lazy = false,
 }
