@@ -1,8 +1,9 @@
+local utils = require "utils"
 local M = {}
 
 M.adapter = {
   type = "executable",
-  command = "~/bin/lldb-vscode",
+  command = "/home/ryder/Downloads/clang+llvm-17.0.6-x86_64-linux-gnu-ubuntu-22.04/bin/lldb-vscode",
   name = "lldb",
 }
 
@@ -12,6 +13,10 @@ M.config = {
     type = "lldb",
     request = "launch",
     program = function()
+      -- Check if there's an executable in the workspace folder. If there is,
+      -- we default to it
+      local files = utils.find_executable "/"
+
       return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
     end,
     cwd = "${workspaceFolder}",

@@ -10,7 +10,7 @@ return {
     local capabilities = require("nvchad.configs.lspconfig").capabilities
 
     local lspconfig = require "lspconfig"
-    local servers = { "html", "cssls", "jdtls", "tsserver", "yamlls", "clangd", "cmake", "bashls" }
+    local servers = { "html", "cssls", "jdtls", "tsserver", "yamlls", "clangd", "cmake", "bashls", "hdl_checker" }
 
     -- lsps with default config
     for _, lsp in ipairs(servers) do
