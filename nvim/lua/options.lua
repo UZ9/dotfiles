@@ -1,6 +1,9 @@
 require "nvchad.options"
 
--- -- Additional Configurations
+-- Remove line below status; status line gets replaced when running commands 
+vim.opt.cmdheight = 0
+
+-- Add conceal for latex previewing
 vim.opt.conceallevel = 2
 
 -- IMPORTANT: Reduce latency when typing; should be used with tmux latency config

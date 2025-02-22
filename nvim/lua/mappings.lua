@@ -1,6 +1,6 @@
 require "nvchad.mappings"
 
-local utils = require("utils")
+local utils = require "utils"
 
 local map = vim.keymap.set
 
@@ -24,14 +24,14 @@ map("n", "<C-d>", execute_lazy "<C-d>zz", { desc = "Move down half a page and ce
 map("n", "<C-b>", execute_lazy "<C-b>zz", { desc = "Move up half a page and center" })
 
 -- Quickly rearrange lines
-map("n", "<C-k>", ":m-2<CR>")
-map("n", "<C-j>", ":m+1<CR>")
+-- map("n", "<C-k>", ":m-2<CR>")
+-- map("n", "<C-j>", ":m+1<CR>")
 
 map("v", "<", "<gv")
 map("v", ">", ">gv")
 
 -- Execute current line in lua
-map("n", "<leader>x", "<cmd>.lua<CR>");
+map("n", "<leader>x", "<cmd>.lua<CR>")
 map("n", "<leader><leader>x", "<cmd> source %<CR>")
 
 vim.keymap.set("n", "<leader>e", "<CMD>Oil<CR>", { desc = "Open parent directory" })
@@ -60,3 +60,14 @@ vim.keymap.set("n", "<Leader>ds", function()
   local widgets = require "dap.ui.widgets"
   widgets.centered_float(widgets.scopes)
 end)
+
+-- Quickfix list navigation
+vim.keymap.set("n", "<C-j>", "<cmd>cnext<CR>zz", {
+  desc = "Quickfix forward",
+  silent = true,
+})
+
+vim.keymap.set("n", "<C-k>", "<cmd>cprev<CR>zz", {
+  desc = "Quickfix backward",
+  silent = true,
+})
