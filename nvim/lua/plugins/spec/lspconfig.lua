@@ -10,7 +10,7 @@ return {
     local capabilities = require("nvchad.configs.lspconfig").capabilities
 
     local lspconfig = require "lspconfig"
-    local servers = { "html", "cssls", "jdtls", "ts_ls", "clangd", "cmake", "bashls", "gopls" }
+    local servers = { "html", "cssls", "jdtls", "clangd", "cmake", "bashls", "gopls" }
 
     -- lsps with default config
     for _, lsp in ipairs(servers) do
@@ -20,13 +20,6 @@ return {
         capabilities = capabilities,
       }
     end
-
-    -- typescript
-    lspconfig.ts_ls.setup {
-      on_attach = on_attach,
-      on_init = on_init,
-      capabilities = capabilities,
-    }
 
     lspconfig.bashls.setup {
       filetypes = { "zsh", "sh" },
