@@ -40,6 +40,17 @@ vim.keymap.set("n", "<Tab>", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 -- Compile cmake
 map("n", "<leader>rr", "<cmd>make -C build<cr>", { desc = "Compile CMake project" })
 
+map("n", "<c-h>", "<cmd>TmuxNavigateLeft<cr>", { desc = "tmux navigate left" })
+map("n", "<c-j>", "<cmd>TmuxNavigateDown<cr>", { desc = "tmux navigate down" })
+map("n", "<c-k>", "<cmd>TmuxNavigateUp<cr>", { desc = "tmux navigate up" })
+map("n", "<c-l>", "<cmd>TmuxNavigateRight<cr>", { desc = "tmux navigate right" })
+map("n", "<c-\\>", "<cmd>TmuxNavigatePrevious<cr>", { desc = "tmux navigate prev" })
+
+map("n", "<leader>rr", "<cmd>make -C build<cr>", { desc = "Compile CMake project" })
+map("n", "<leader>rr", "<cmd>make -C build<cr>", { desc = "Compile CMake project" })
+map("n", "<leader>rr", "<cmd>make -C build<cr>", { desc = "Compile CMake project" })
+map("n", "<leader>rr", "<cmd>make -C build<cr>", { desc = "Compile CMake project" })
+
 -- nvim-dap
 vim.keymap.set("n", "<Leader>b", function()
   require("dap").toggle_breakpoint()
@@ -62,12 +73,12 @@ vim.keymap.set("n", "<Leader>ds", function()
 end)
 
 -- Quickfix list navigation
-vim.keymap.set("n", "<C-j>", "<cmd>cnext<CR>zz", {
+vim.keymap.set("n", "<M-j>", "<cmd>cnext<CR>zz", {
   desc = "Quickfix forward",
   silent = true,
 })
 
-vim.keymap.set("n", "<C-k>", "<cmd>cprev<CR>zz", {
+vim.keymap.set("n", "<M-k>", "<cmd>cprev<CR>zz", {
   desc = "Quickfix backward",
   silent = true,
 })
