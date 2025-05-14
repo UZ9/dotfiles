@@ -6,6 +6,12 @@ return {
     require("oil").setup({
       view_options = {
         show_hidden = true
+      },
+      keymaps = {
+        ["<C-h>"] = false, -- disable splitting to allow tmux nav
+        ["<C-j>"] = false, -- disable splitting to allow tmux nav
+        ["<C-k>"] = false, -- disable splitting to allow tmux nav
+        ["<C-l>"] = false -- disable splitting to allow tmux nav
       }
     })
 

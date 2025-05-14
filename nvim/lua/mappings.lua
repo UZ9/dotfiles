@@ -23,10 +23,6 @@ end
 map("n", "<C-d>", execute_lazy "<C-d>zz", { desc = "Move down half a page and center" })
 map("n", "<C-b>", execute_lazy "<C-b>zz", { desc = "Move up half a page and center" })
 
--- Quickly rearrange lines
--- map("n", "<C-k>", ":m-2<CR>")
--- map("n", "<C-j>", ":m+1<CR>")
-
 map("v", "<", "<gv")
 map("v", ">", ">gv")
 
@@ -40,16 +36,16 @@ vim.keymap.set("n", "<Tab>", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 -- Compile cmake
 map("n", "<leader>rr", "<cmd>make -C build<cr>", { desc = "Compile CMake project" })
 
+-- seamless vim split and tmux nav
 map("n", "<c-h>", "<cmd>TmuxNavigateLeft<cr>", { desc = "tmux navigate left" })
 map("n", "<c-j>", "<cmd>TmuxNavigateDown<cr>", { desc = "tmux navigate down" })
 map("n", "<c-k>", "<cmd>TmuxNavigateUp<cr>", { desc = "tmux navigate up" })
 map("n", "<c-l>", "<cmd>TmuxNavigateRight<cr>", { desc = "tmux navigate right" })
 map("n", "<c-\\>", "<cmd>TmuxNavigatePrevious<cr>", { desc = "tmux navigate prev" })
 
-map("n", "<leader>rr", "<cmd>make -C build<cr>", { desc = "Compile CMake project" })
-map("n", "<leader>rr", "<cmd>make -C build<cr>", { desc = "Compile CMake project" })
-map("n", "<leader>rr", "<cmd>make -C build<cr>", { desc = "Compile CMake project" })
-map("n", "<leader>rr", "<cmd>make -C build<cr>", { desc = "Compile CMake project" })
+-- split shorthand
+map("n", "<m-l>", ":vsplit<cr>", { desc = "split vertical" })
+map("n", "<m-h>", ":split<cr>", { desc = "split horizontal" })
 
 -- nvim-dap
 vim.keymap.set("n", "<Leader>b", function()
