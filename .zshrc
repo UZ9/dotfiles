@@ -14,6 +14,7 @@ export CUDA_HOME=/usr/local/cuda
 path=(
   $path
   $HOME/bin
+  $HOME/.bun/bin
   $HOME/.local/bin 
   $HOME/.yarn/bin 
   $HOME/Downloads/nvim-linux64/bin 
@@ -34,7 +35,7 @@ export PATH=$PATH:$CUDA_HOME/bin
 
 # export ZSH="$HOME/.oh-my-zsh/"
 
-KEY_TIMEOUT=1
+KEY_TIMEOUT=0
 
 # ------------------ History ------------------
 
@@ -48,7 +49,7 @@ setopt HIST_IGNORE_SPACE
 
 # ------------------ Aliases ------------------
 alias scripts='cd $SCRIPTS'
-alias dot='cd $HOME/ConfigCode/dotfiles'
+alias dot='cd $HOME/dotfiles'
 
 
 # ls color 
@@ -102,3 +103,7 @@ case ":$PATH:" in
 esac
 # pnpm end
 source ~/powerlevel10k/powerlevel10k.zsh-theme
+
+. "$HOME/.atuin/bin/env"
+
+eval "$(atuin init zsh --disable-up-arrow)"
