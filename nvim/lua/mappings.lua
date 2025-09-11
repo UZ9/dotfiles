@@ -52,6 +52,27 @@ vim.keymap.set("n", "<Leader>b", function()
   require("dap").toggle_breakpoint()
 end)
 
+vim.keymap.set("n", "<Leader>tt", function()
+  require("dapui").toggle()
+end)
+
+vim.keymap.set("n", "<Leader>tr", function()
+  -- start gdb server
+  local job_id = vim.fn.jobstart({'ghostty', '-e', '~/Classes/CS3210/xv6/scripts/docker.sh', '--attach'}, {
+  on_stdout = function(_, data, _)
+    for _, line in ipairs(data) do
+      vim.print(line)
+    end
+  end,
+})
+
+  -- turn on debugger
+  require("dapui").toggle()
+
+  -- start debugging 
+  require("dap").continue()
+end)
+
 vim.keymap.set("n", "<F5>", function()
   require("dap").continue()
 end)
