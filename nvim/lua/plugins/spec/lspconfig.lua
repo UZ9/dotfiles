@@ -1,6 +1,10 @@
 --- @type LazyPluginSpec
 return {
   "neovim/nvim-lspconfig",
+  dependencies = {
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+  },
   cmd = { "LspInfo", "LspInstall", "LspUninstall" },
   config = function()
     require("nvchad.configs.lspconfig").defaults()
