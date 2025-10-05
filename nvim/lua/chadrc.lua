@@ -8,7 +8,7 @@ M.ui = {
   theme_toggle = { "everforest", "one_light" },
   lsp_semantic_tokens = true,
   statusline = {
-    theme = "vscode_colored",
+    enabled = false
   },
   telescope = {
     style = "bordered",

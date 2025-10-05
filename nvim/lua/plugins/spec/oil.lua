@@ -12,7 +12,8 @@ return {
         ["<C-j>"] = false, -- disable splitting to allow tmux nav
         ["<C-k>"] = false, -- disable splitting to allow tmux nav
         ["<C-l>"] = false -- disable splitting to allow tmux nav
-      }
+      },
+      columns = {}
     })
 
     vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
