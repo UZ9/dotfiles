@@ -4,6 +4,7 @@ return {
   dependencies = {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
+    "b0o/schemastore.nvim",
   },
   cmd = { "LspInfo", "LspInstall", "LspUninstall" },
   config = function()
@@ -41,6 +42,17 @@ return {
       on_init = on_init,
       capabilities = capabilities,
       filetypes = { "sv", "systemverilog" },
+    }
+
+    -- not sure how i missed this my whole life, but json schemas for everyone!
+    -- no more manually entering schemas...
+    lspconfig.jsonls.setup {
+      settings = {
+        json = {
+          schemas = require('schemastore').json.schemas(),
+          validate = { enable = true },
+        }
+      }
     }
 
     lspconfig.yamlls.setup {

@@ -10,6 +10,7 @@ return {
       "clangd",
       "bashls",
       "jdtls",
+      "jsonls",
 
       -- C++ specific
       "clangd",
