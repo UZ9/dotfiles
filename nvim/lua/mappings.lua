@@ -47,6 +47,11 @@ map("n", "<c-\\>", "<cmd>TmuxNavigatePrevious<cr>", { desc = "tmux navigate prev
 map("n", "<m-l>", ":vsplit<cr>", { desc = "split vertical" })
 map("n", "<m-h>", ":split<cr>", { desc = "split horizontal" })
 
+-- search for functions in project
+map("n", "<leader>fr", function()
+  require("telescope.builtin").lsp_workspace_symbols({ symbols={'function', 'method'} })
+end)
+
 -- nvim-dap
 vim.keymap.set("n", "<Leader>b", function()
   require("dap").toggle_breakpoint()
