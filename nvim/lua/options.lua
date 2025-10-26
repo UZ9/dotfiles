@@ -1,5 +1,3 @@
-require "nvchad.options"
-
 -- Remove line below status; status line gets replaced when running commands 
 vim.opt.cmdheight = 0
 
@@ -11,6 +9,9 @@ vim.opt.ttimeoutlen = 0
 
 -- Force relative number
 vim.wo.relativenumber = true
+
+-- Highlight current line 
+vim.opt.cursorline = true
 
 -- Custom theme for Neovide
 local alpha = function()
