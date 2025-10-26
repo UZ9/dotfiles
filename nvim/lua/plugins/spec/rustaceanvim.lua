@@ -2,7 +2,8 @@
 return {
   "mrcjkb/rustaceanvim",
   version = "^5",
-  lazy = false, -- rustaceanvim is already lazy
+  -- lazy = false, -- rustaceanvim is already lazy
+  ft = "rust",
   config = function()
     vim.g.rustaceanvim = {
       server = {

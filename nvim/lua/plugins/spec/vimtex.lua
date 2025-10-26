@@ -8,5 +8,4 @@ vim.g.vimtex_view_general_options = "-reuse-instance -forward-search @tex @line 
 --- @type LazyPluginSpec
 return {
   "lervag/vimtex",
-  lazy = false, -- TODO: Move to non-lazy
 }

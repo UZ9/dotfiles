@@ -23,6 +23,7 @@ fish_add_path /bin
 fish_add_path $CUDA_HOME/bin
 fish_add_path ~/go/bin
 fish_add_path ~/.npm-global/bin
+fish_add_path $HOME/.cargo/bin
 
 # Set LD_LIBRARY_PATH
 set -x LD_LIBRARY_PATH $LD_LIBRARY_PATH:/usr/local/cuda/lib64:/usr/local/cuda/extras/CUPTI/lib64
@@ -42,3 +43,8 @@ fish_add_path $PNPM_HOME
 
 # zoxide initialization 
 zoxide init fish | source
+
+
+
+# -------------------------------------------
+

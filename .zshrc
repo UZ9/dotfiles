@@ -21,6 +21,7 @@ path=(
   $HOME/Downloads/clang+llvm-17.0.6-x86_64-linux-gnu-ubuntu-22.04/bin
   $HOME/.npm-global/bin:$PATH
   /opt/nvim-linux64/bin
+  $HOME/.cargo/bin
   /bin
 )
 
