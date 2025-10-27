@@ -50,6 +50,8 @@ map("n", "<leader>fr", function()
   require("telescope.builtin").lsp_workspace_symbols({ symbols={'function', 'method'} })
 end)
 
+
+
 -- nvim-dap
 vim.keymap.set("n", "<Leader>b", function()
   require("dap").toggle_breakpoint()
@@ -74,6 +76,10 @@ vim.keymap.set("n", "<Leader>tr", function()
 
   -- start debugging 
   require("dap").continue()
+end)
+
+vim.keymap.set("n", "<Leader>lg", function()
+	Snacks.lazygit()
 end)
 
 vim.keymap.set("n", "<F5>", function()
