@@ -8,7 +8,8 @@ vim.opt.conceallevel = 2
 vim.opt.ttimeoutlen = 0
 
 -- Force relative number
-vim.wo.relativenumber = true
+vim.opt.relativenumber = true
+vim.opt.number = true
 
 -- Highlight current line
 vim.opt.cursorline = true
