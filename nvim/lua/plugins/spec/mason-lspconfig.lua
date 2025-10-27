@@ -16,4 +16,10 @@ return {
       "clangd",
     },
   },
+  config = function()
+    require("mason-lspconfig").setup {
+      automatic_enable = false,
+      automatic_setup = false,
+    }
+  end,
 }
