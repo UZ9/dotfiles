@@ -8,7 +8,6 @@ return {
   -- lazy = false,
   config = function()
     ---@type CompileModeOpts
-    vim.g.compile_mode = {
-    }
-  end
+    vim.g.compile_mode = {}
+  end,
 }

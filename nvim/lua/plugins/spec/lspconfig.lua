@@ -8,39 +8,38 @@ return {
     "b0o/schemastore.nvim",
   },
   opts = function()
-      local ret = {
-	      diagnostics = {
-		      underline = true,
-		      update_in_insert = false,
-		      virtual_text = {
-			      spacing = 4,
-			      source = "if_many",
-			      prefix = "●",
-		      },
-		      severity_sort = true,
-	      },
-	      inlay_hints = {
-		      enabled = true,
-		      exlude = { "vue" },
-	      },
-	      codelens = {
-		      enabled = false,
-	      },
-	      folds = {
-		      enabled = true,
-	      }
-      }
+    local ret = {
+      diagnostics = {
+        underline = true,
+        update_in_insert = false,
+        virtual_text = {
+          spacing = 4,
+          source = "if_many",
+          prefix = "●",
+        },
+        severity_sort = true,
+      },
+      inlay_hints = {
+        enabled = true,
+        exlude = { "vue" },
+      },
+      codelens = {
+        enabled = false,
+      },
+      folds = {
+        enabled = true,
+      },
+    }
 
-      return ret
-
+    return ret
   end,
   cmd = { "LspInfo", "LspInstall", "LspUninstall" },
   config = function()
     --local on_attach = require("nvchad.configs.lspconfig").on_attach
-   -- local on_init = require("nvchad.configs.lspconfig").on_init
+    -- local on_init = require("nvchad.configs.lspconfig").on_init
     --local capabilities = require("nvchad.configs.lspconfig").capabilities
-    
-    lspconfig.ts_ls.setup({ autostart = false })
+
+    lspconfig.ts_ls.setup { autostart = false }
 
     local lspconfig = require "lspconfig"
     local servers = { "html", "cssls", "jdtls", "clangd", "cmake", "bashls", "gopls", "pyright" }
@@ -55,11 +54,11 @@ return {
     -- end
 
     -- typescript
-   -- lspconfig.ts_ls.setup {
-   --   on_attach = on_attach,
-   --   on_init = on_init,
-   --   capabilities = capabilities,
-   -- }
+    -- lspconfig.ts_ls.setup {
+    --   on_attach = on_attach,
+    --   on_init = on_init,
+    --   capabilities = capabilities,
+    -- }
 
     lspconfig.bashls.setup {
       filetypes = { "zsh", "sh" },
@@ -77,10 +76,10 @@ return {
     lspconfig.jsonls.setup {
       settings = {
         json = {
-          schemas = require('schemastore').json.schemas(),
+          schemas = require("schemastore").json.schemas(),
           validate = { enable = true },
-        }
-      }
+        },
+      },
     }
 
     lspconfig.yamlls.setup {

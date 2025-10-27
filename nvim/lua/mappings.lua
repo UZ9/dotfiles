@@ -47,10 +47,8 @@ map("n", "<m-h>", ":split<cr>", { desc = "split horizontal" })
 
 -- search for functions in project
 map("n", "<leader>fr", function()
-  require("telescope.builtin").lsp_workspace_symbols({ symbols={'function', 'method'} })
+  require("telescope.builtin").lsp_workspace_symbols { symbols = { "function", "method" } }
 end)
-
-
 
 -- nvim-dap
 vim.keymap.set("n", "<Leader>b", function()
@@ -63,23 +61,23 @@ end)
 
 vim.keymap.set("n", "<Leader>tr", function()
   -- start gdb server
-  local job_id = vim.fn.jobstart({'ghostty', '-e', '~/Classes/CS3210/xv6/scripts/docker.sh', '--attach'}, {
-  on_stdout = function(_, data, _)
-    for _, line in ipairs(data) do
-      vim.print(line)
-    end
-  end,
-})
+  local job_id = vim.fn.jobstart({ "ghostty", "-e", "~/Classes/CS3210/xv6/scripts/docker.sh", "--attach" }, {
+    on_stdout = function(_, data, _)
+      for _, line in ipairs(data) do
+        vim.print(line)
+      end
+    end,
+  })
 
   -- turn on debugger
   require("dapui").toggle()
 
-  -- start debugging 
+  -- start debugging
   require("dap").continue()
 end)
 
 vim.keymap.set("n", "<Leader>lg", function()
-	Snacks.lazygit()
+  Snacks.lazygit()
 end)
 
 vim.keymap.set("n", "<F5>", function()
@@ -108,3 +106,8 @@ vim.keymap.set("n", "<M-k>", "<cmd>cprev<CR>zz", {
   desc = "Quickfix backward",
   silent = true,
 })
+
+-- formatting code
+vim.keymap.set("n", "<leader>fm", function()
+  require("conform").format()
+end)

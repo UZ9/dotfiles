@@ -4,30 +4,29 @@ return {
     "yioneko/nvim-vtsls", -- optional but recommended for vtsls
   },
   config = function()
-    local lspconfig = require("lspconfig")
-    
+    local lspconfig = require "lspconfig"
+
     -- Helper function to execute LSP commands
     local function execute_command(command, args)
-      vim.lsp.buf.execute_command({
+      vim.lsp.buf.execute_command {
         command = command,
         arguments = args or {},
-      })
+      }
     end
-    
+
     -- Helper function for code actions
     local function get_code_action(action_kind)
       return function()
-        vim.lsp.buf.code_action({
+        vim.lsp.buf.code_action {
           context = {
             only = { action_kind },
             diagnostics = {},
           },
           apply = true,
-        })
+        }
       end
     end
-    
-    
+
     -- Handle deno/vtsls conflict if needed
     if vim.lsp.config.denols and vim.lsp.config.vtsls then
       local function resolve(server)
@@ -47,12 +46,12 @@ return {
           end,
         })
       end
-      resolve("denols")
-      resolve("vtsls")
+      resolve "denols"
+      resolve "vtsls"
     end
-    
+
     -- Configure vtsls
-    lspconfig.vtsls.setup({
+    lspconfig.vtsls.setup {
       filetypes = {
         "javascript",
         "javascriptreact",
@@ -105,7 +104,7 @@ return {
       on_attach = function(client, bufnr)
         -- Set up keymaps
         local opts = { buffer = bufnr, silent = true }
-        
+
         -- Go to source definition
         vim.keymap.set("n", "gD", function()
           local params = vim.lsp.util.make_position_params()
@@ -114,46 +113,62 @@ return {
             params.position,
           })
         end, vim.tbl_extend("force", opts, { desc = "Goto Source Definition" }))
-        
+
         -- File references
         vim.keymap.set("n", "gR", function()
           execute_command("typescript.findAllFileReferences", {
             vim.uri_from_bufnr(0),
           })
         end, vim.tbl_extend("force", opts, { desc = "File References" }))
-        
+
         -- Code actions
-        vim.keymap.set("n", "<leader>co", get_code_action("source.organizeImports"),
-          vim.tbl_extend("force", opts, { desc = "Organize Imports" }))
-        
-        vim.keymap.set("n", "<leader>cM", get_code_action("source.addMissingImports.ts"),
-          vim.tbl_extend("force", opts, { desc = "Add missing imports" }))
-        
-        vim.keymap.set("n", "<leader>cu", get_code_action("source.removeUnused.ts"),
-          vim.tbl_extend("force", opts, { desc = "Remove unused imports" }))
-        
-        vim.keymap.set("n", "<leader>cD", get_code_action("source.fixAll.ts"),
-          vim.tbl_extend("force", opts, { desc = "Fix all diagnostics" }))
-        
+        vim.keymap.set(
+          "n",
+          "<leader>co",
+          get_code_action "source.organizeImports",
+          vim.tbl_extend("force", opts, { desc = "Organize Imports" })
+        )
+
+        vim.keymap.set(
+          "n",
+          "<leader>cM",
+          get_code_action "source.addMissingImports.ts",
+          vim.tbl_extend("force", opts, { desc = "Add missing imports" })
+        )
+
+        vim.keymap.set(
+          "n",
+          "<leader>cu",
+          get_code_action "source.removeUnused.ts",
+          vim.tbl_extend("force", opts, { desc = "Remove unused imports" })
+        )
+
+        vim.keymap.set(
+          "n",
+          "<leader>cD",
+          get_code_action "source.fixAll.ts",
+          vim.tbl_extend("force", opts, { desc = "Fix all diagnostics" })
+        )
+
         -- Select TypeScript version
         vim.keymap.set("n", "<leader>cV", function()
-          execute_command("typescript.selectTypeScriptVersion")
+          execute_command "typescript.selectTypeScriptVersion"
         end, vim.tbl_extend("force", opts, { desc = "Select TS workspace version" }))
       end,
-    })
-    
+    }
+
     -- Use Snacks for move to file refactoring
     Snacks.util.lsp.on({ name = "vtsls" }, function(buffer, client)
       client.commands["_typescript.moveToFileRefactoring"] = function(command, ctx)
         local action, uri, range = unpack(command.arguments)
-        
+
         local function move(newf)
           client:request("workspace/executeCommand", {
             command = command.command,
             arguments = { action, uri, range, newf },
           })
         end
-        
+
         local fname = vim.uri_to_fname(uri)
         client:request("workspace/executeCommand", {
           command = "typescript.tsserverRequest",
@@ -176,7 +191,7 @@ return {
               return vim.fn.fnamemodify(f, ":~:.")
             end,
           }, function(f)
-            if f and f:find("^Enter new path") then
+            if f and f:find "^Enter new path" then
               vim.ui.input({
                 prompt = "Enter move destination:",
                 default = vim.fn.fnamemodify(fname, ":h") .. "/",

@@ -6,7 +6,7 @@ return {
     dofile(vim.g.base46_cache .. "syntax")
 
     local preinstalled_langs = {
-      ensure_installed = { "bash", "python", "lua", "yaml", "json", "toml" }
+      ensure_installed = { "bash", "python", "lua", "yaml", "json", "toml" },
     }
 
     -- avoid conflicting with original config
