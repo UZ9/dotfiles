@@ -13,6 +13,9 @@ vim.wo.relativenumber = true
 -- Highlight current line
 vim.opt.cursorline = true
 
+-- Clipboard 
+vim.opt.clipboard = "unnamedplus"
+
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
