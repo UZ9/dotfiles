@@ -17,6 +17,10 @@ vim.opt.cursorline = true
 -- Clipboard 
 vim.opt.clipboard = "unnamedplus"
 
+-- smartcase when searching 
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
