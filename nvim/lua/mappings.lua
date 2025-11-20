@@ -111,3 +111,23 @@ vim.keymap.set("n", "<M-k>", "<cmd>cprev<CR>zz", {
 vim.keymap.set("n", "<leader>fm", function()
   require("conform").format()
 end)
+
+-- code compile 
+vim.keymap.set("n", "<leader>o", function()
+  require("compile-mode").recompile()
+end)
+
+-- next error in compile mode
+vim.keymap.set("n", "[e", "<cmd>NextError<cr>")
+vim.keymap.set("n", "]e", "<cmd>PrevError<cr>")
+
+-- code compile 
+vim.keymap.set("n", "<leader>O", function()
+  require("compile-mode").compile()
+end)
+
+-- execute current line within a shell script
+vim.keymap.set("n", "<leader>e", "<cmd>exec '!'.getline('.')<cr>")
+
+-- code action
+vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)

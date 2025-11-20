@@ -5,6 +5,7 @@ return {
   dependencies = {
     "nvim-lua/plenary.nvim",
   },
+  cmd = "Compile",
   -- lazy = false,
   config = function()
     ---@type CompileModeOpts
