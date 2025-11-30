@@ -6,6 +6,15 @@ return {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     "b0o/schemastore.nvim",
+    {
+      "folke/lazydev.nvim",
+      ft = "lua",
+      opts = {
+        library = {
+          { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+        },
+      },
+    },
   },
   opts = function()
     local ret = {
@@ -37,18 +46,18 @@ return {
   config = function()
     local lspconfig = require("lspconfig")
 
-    vim.lsp.config(
-      "luals",
-      {
-        capabilities = require("blink.cmp").get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities()),
-        root_markers = { ".git" },
-        on_attach = function()
-          -- will do attach keybinds later
-        end,
-      }
-    )
+    lspconfig.lua_ls.setup{}
 
-    vim.lsp.enable({"luals"})
+    -- vim.lsp.config(
+    --   "luals",
+    --   {
+    --     capabilities = require("blink.cmp").get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities()),
+    --     root_markers = { ".git" },
+    --     on_attach = function()
+    --       -- will do attach keybinds later
+    --     end,
+    --   }
+    -- )
 
     --local on_attach = require("nvchad.configs.lspconfig").on_attach
     -- local on_init = require("nvchad.configs.lspconfig").on_init

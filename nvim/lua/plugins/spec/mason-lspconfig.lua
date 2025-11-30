@@ -7,8 +7,6 @@ return {
   },
   opts = {
     ensure_installed = {
-      "stylua",
-      "luals",
       "clangd",
       "bashls",
       "jdtls",
@@ -22,7 +20,8 @@ return {
     require("mason-lspconfig").setup {
       automatic_enable = {
         exclude = {
-          "rust_analyzer"
+          "rust_analyzer",
+          "lua_ls"
         }
       },
       automatic_setup = true,
