@@ -131,3 +131,6 @@ vim.keymap.set("n", "<leader>e", "<cmd>exec '!'.getline('.')<cr>")
 
 -- code action
 vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
+
+-- goto definition (why is this not the default?)
+vim.keymap.set("n", "gd", vim.lsp.buf.definition)

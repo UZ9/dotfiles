@@ -8,13 +8,15 @@ return {
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
-    keymap = { preset = "default" },
+    keymap = { preset = "enter" },
 
     appearance = {
       nerd_font_variant = "mono",
     },
 
-    completion = { documentation = { auto_show = false } },
+    signature = { enabled = true },
+
+    completion = { documentation = { auto_show = true } },
 
     sources = {
       default = { "lsp", "path", "snippets", "buffer" },

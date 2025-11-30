@@ -35,11 +35,28 @@ return {
   end,
   cmd = { "LspInfo", "LspInstall", "LspUninstall" },
   config = function()
+    local lspconfig = require("lspconfig")
+
+    vim.lsp.config(
+      "luals",
+      {
+        capabilities = require("blink.cmp").get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities()),
+        root_markers = { ".git" },
+        on_attach = function()
+          -- will do attach keybinds later
+        end,
+      }
+    )
+
+    vim.lsp.enable({"luals"})
+
     --local on_attach = require("nvchad.configs.lspconfig").on_attach
     -- local on_init = require("nvchad.configs.lspconfig").on_init
     --local capabilities = require("nvchad.configs.lspconfig").capabilities
 
-    lspconfig.ts_ls.setup { autostart = false }
+    -- lspconfig.ts_ls.setup { autostart = false }
+
+    -- NOTE: bashls doesn't work without shellcheck, this has to be installed
 
     local lspconfig = require "lspconfig"
     local servers = { "html", "cssls", "jdtls", "clangd", "cmake", "bashls", "gopls", "pyright" }
@@ -59,6 +76,65 @@ return {
     --   on_init = on_init,
     --   capabilities = capabilities,
     -- }
+        --
+    -- lspconfig.lua_ls.setup({
+    --     on_init = function(client)
+    --       if client.workspace_folders then
+    --         local path = client.workspace_folders[1].name
+    --         if path ~= vim.fn.stdpath('config') and (vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc')) then
+    --           return
+    --         end
+    --       end
+    --
+    --       client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+    --         runtime = {
+    --           version = 'LuaJIT',
+    --           path = { 'lua/?.lua', 'lua/?/init.lua' },
+    --         },
+    --         workspace = {
+    --           checkThirdParty = false,
+    --           library = { vim.env.VIMRUNTIME }
+    --         }
+    --       })
+    --     end,
+    --     settings = { Lua = {} }
+    --   })
+
+    lspconfig.vtsls.setup {
+      on_attach = function(client, bufnr)
+        if client.server_capabilities.inlayHintProvider then
+          vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+        end
+      end,
+      settings = {
+        complete_function_calls = true,
+        vtsls = {
+          enableMoveToFileCodeAction = true,
+          autoUseWorkspaceTsdk = true,
+          experimental = {
+            maxInlayHintLength = 30,
+            completion = {
+              enableServerSideFuzzyMatch = true,
+            },
+          },
+        },
+        typescript = {
+          updateImportsOnFileMove = { enabled = "always" },
+          suggest = {
+            completeFunctionCalls = true,
+          },
+          inlayHints = {
+            enumMemberValues = { enabled = true },
+            functionLikeReturnTypes = { enabled = true },
+            parameterNames = { enabled = "literals" },
+            parameterTypes = { enabled = true },
+            propertyDeclarationTypes = { enabled = true },
+            variableTypes = { enabled = false },
+
+          },
+        },
+      },
+    }
 
     lspconfig.bashls.setup {
       filetypes = { "zsh", "sh" },

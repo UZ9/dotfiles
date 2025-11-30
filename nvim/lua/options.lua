@@ -52,3 +52,6 @@ vim.filetype.add {
   vertexshader = "hlsl",
   fragmentshader = "hlsl",
 }
+
+-- inlay hints (e.g. type recommendations)
+vim.lsp.inlay_hint.enable(true)
