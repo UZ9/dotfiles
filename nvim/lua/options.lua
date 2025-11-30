@@ -14,10 +14,10 @@ vim.opt.number = true
 -- Highlight current line
 vim.opt.cursorline = true
 
--- Clipboard 
+-- Clipboard
 vim.opt.clipboard = "unnamedplus"
 
--- smartcase when searching 
+-- smartcase when searching
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 

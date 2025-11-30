@@ -112,7 +112,7 @@ vim.keymap.set("n", "<leader>fm", function()
   require("conform").format()
 end)
 
--- code compile 
+-- code compile
 vim.keymap.set("n", "<leader>o", function()
   require("compile-mode").recompile()
 end)
@@ -121,7 +121,7 @@ end)
 vim.keymap.set("n", "[e", "<cmd>NextError<cr>")
 vim.keymap.set("n", "]e", "<cmd>PrevError<cr>")
 
--- code compile 
+-- code compile
 vim.keymap.set("n", "<leader>O", function()
   require("compile-mode").compile()
 end)

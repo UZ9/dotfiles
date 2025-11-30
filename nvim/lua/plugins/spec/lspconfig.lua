@@ -44,9 +44,9 @@ return {
   end,
   cmd = { "LspInfo", "LspInstall", "LspUninstall" },
   config = function()
-    local lspconfig = require("lspconfig")
+    local lspconfig = require "lspconfig"
 
-    lspconfig.lua_ls.setup{}
+    lspconfig.lua_ls.setup {}
 
     -- vim.lsp.config(
     --   "luals",
@@ -85,7 +85,7 @@ return {
     --   on_init = on_init,
     --   capabilities = capabilities,
     -- }
-        --
+    --
     -- lspconfig.lua_ls.setup({
     --     on_init = function(client)
     --       if client.workspace_folders then
@@ -139,7 +139,6 @@ return {
             parameterTypes = { enabled = true },
             propertyDeclarationTypes = { enabled = true },
             variableTypes = { enabled = false },
-
           },
         },
       },

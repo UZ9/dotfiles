@@ -14,13 +14,12 @@ return {
               chainingHints = true,
               parameterHints = true,
               closingBraceHints = {
-                enable = true
-              }
-            }
-          }
-        }
-      }
+                enable = true,
+              },
+            },
+          },
+        },
+      },
     }
-
-  end
+  end,
 }

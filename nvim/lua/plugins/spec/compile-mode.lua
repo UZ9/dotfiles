@@ -1,4 +1,4 @@
----@type NvPluginSpec
+---@type LazyPluginSpec
 return {
   "ej-shafran/compile-mode.nvim",
   version = "^5.0.0",
