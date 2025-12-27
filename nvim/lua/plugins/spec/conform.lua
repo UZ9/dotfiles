@@ -12,6 +12,7 @@ return {
         json = { "prettier" },
         javascript = { "prettier" },
         typescript = { "prettier" },
+        rust = { "rustfmt" },
       },
     }
 

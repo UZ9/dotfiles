@@ -12,6 +12,7 @@ return {
     -- input = { enabled = true },
     -- picker = { enabled = true },
     -- notifier = { enabled = true },
+    image = { enabled = true, img_dirs = { "999 Attachments" } },
     quickfile = { enabled = true },
     scope = { enabled = true },
     -- scroll = { enabled = true },
