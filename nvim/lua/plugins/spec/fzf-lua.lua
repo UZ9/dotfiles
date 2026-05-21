@@ -144,14 +144,14 @@ return {
     end
     require("fzf-lua").setup(opts)
   end,
-  init = function()
-    vim.ui.select = function(...)
-      require("lazy").load { plugins = { "fzf-lua" } }
-      local opts = {}
-      require("fzf-lua").register_ui_select(opts.ui_select or nil)
-      return vim.ui.select(...)
-    end
-  end,
+  -- init = function()
+  --   vim.ui.select = function(...)
+  --     require("lazy").load { plugins = { "fzf-lua" } }
+  --     local opts = {}
+  --     require("fzf-lua").register_ui_select(opts.ui_select or nil)
+  --     return vim.ui.select(...)
+  --   end
+  -- end,
   keys = {
     { "<c-j>", "<c-j>", ft = "fzf", mode = "t", nowait = true },
     { "<c-k>", "<c-k>", ft = "fzf", mode = "t", nowait = true },
