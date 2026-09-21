@@ -10,7 +10,7 @@ return {
     -- avoid conflicting with original config
     local final_opts = vim.tbl_deep_extend("force", opts, preinstalled_langs)
 
-    require("nvim-treesitter.configs").setup(final_opts)
+    -- require("nvim-treesitter.configs").setup(final_opts)
 
     vim.treesitter.language.register("markdown", "mdx")
   end,

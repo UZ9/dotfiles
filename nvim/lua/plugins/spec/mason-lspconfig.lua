@@ -22,9 +22,10 @@ return {
         exclude = {
           "rust_analyzer",
           "lua_ls",
+          "verible",
+          "svlangserver"
         },
       },
-      automatic_setup = true,
     }
   end,
 }

@@ -28,6 +28,10 @@ vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.smartindent = true
 
+--vim.opt.foldlevelstart = 99
+--vim.wo.foldmethod = "expr"
+--vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+
 -- Custom theme for Neovide
 local alpha = function()
   return string.format("%x", math.floor(255 * (vim.g.transparency or 0.8)))

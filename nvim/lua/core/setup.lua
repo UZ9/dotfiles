@@ -9,6 +9,9 @@ if not vim.loop.fs_stat(lazypath) then
   vim.fn.system { "git", "clone", "--filter=blob:none", repo, "--branch=stable", lazypath }
 end
 
+-- neovim decides sometimes .v is verilog and sometimes it's v...
+vim.g.filetype_v = "verilog"
+
 vim.opt.rtp:prepend(lazypath)
 
 vim.opt.rtp:prepend(vim.fn.stdpath "data" .. "/lazy/tokyonight.nvim")

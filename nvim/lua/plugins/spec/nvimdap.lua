@@ -2,7 +2,6 @@
 return {
   "mfussenegger/nvim-dap",
   dependencies = {
-    "rcarriga/nvim-dap-ui",
     {
       "williamboman/mason.nvim",
       opts = function(_, opts)
@@ -15,39 +14,49 @@ return {
   config = function()
     local dap = require "dap"
 
+    -- open source cpp dap sucks so let's just steal the vscode one
+    local cpptools_adapters = vim.fn.glob(
+      vim.fn.expand "~/.vscode/extensions/ms-vscode.cpptools-*/debugAdapters/bin/OpenDebugAD7",
+      false,
+      true
+    )
+    table.sort(cpptools_adapters)
+
+    local cppdbg = cpptools_adapters[#cpptools_adapters]
+
     dap.adapters.cppdbg = {
       id = "cppdbg",
       type = "executable",
-      command = "~/Downloads/cpptools/extension/debugAdapters/bin/OpenDebugAD7",
+      command = cppdbg,
     }
-    -- todo: don't hardcode cpptools (mason is supposed to be able to install this but it got removed for whatever reason)
-    dap.configurations.c = {
-      {
-        name = "Debug xv6 Kernel",
-        type = "cppdbg",
-        request = "launch",
-        program = vim.fn.expand "~/Classes/CS3210/xv6/build/kernel/kernel",
-        miDebuggerServerAddress = "localhost:1234",
 
-        sourceFileMap = {
-          ["/xv6"] = vim.fn.expand "~/Classes/CS3210/xv6",
-        },
+    local launch_json_provider = dap.providers.configs["dap.launch.json"]
 
-        miDebuggerPath = "/usr/bin/gdb",
-        cwd = "${workspaceFolder}",
+    -- latch onto xv6 debugger if possible 
+    -- TODO: need to figure out a way to have this config entirely within the project to not require others to check for this
+    dap.providers.configs["dap.launch.json"] = function(bufnr)
+      local configurations = launch_json_provider(bufnr)
+      for _, configuration in ipairs(configurations) do
+        if configuration.name == "xv6: Attach to ./ag run --gdb" then
+          configuration.launchCompleteCommand = "None"
+        end
+      end
+      return configurations
+    end
 
-        setupCommands = {
-          {
-            text = "source " .. vim.fn.expand "~/Classes/CS3210/debug/xv6.gdbinit",
-            description = "Load xv6 GDB hooks",
-            ignoreFailures = false,
-          },
-        },
-      },
-    }
+    local function set_dap_highlights()
+      vim.api.nvim_set_hl(0, "DapStopped", { link = "Visual" })
+    end
+
+    set_dap_highlights()
+    vim.api.nvim_create_autocmd("ColorScheme", {
+      group = vim.api.nvim_create_augroup("dap_highlights", { clear = true }),
+      callback = set_dap_highlights,
+    })
 
     local sign = vim.fn.sign_define
 
+    sign("DapBreakpoint", { text = "●", texthl = "DiagnosticError", linehl = "", numhl = "" })
     sign("DapLogPoint", { text = "◆", texthl = "DapLogPoint", linehl = "", numhl = "" })
     sign("DapStopped", { text = "", texthl = "DapStopped", linehl = "DapStopped", numhl = "DapStopped" })
   end,

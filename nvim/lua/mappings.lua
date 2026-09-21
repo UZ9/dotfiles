@@ -81,8 +81,39 @@ vim.keymap.set("n", "<Leader>lg", function()
 end)
 
 vim.keymap.set("n", "<F5>", function()
-  require("dap").continue()
-end)
+  local dap = require "dap"
+
+  -- xv6 gdb requires one continue command to be issued first, vscode users will have to manually 
+  -- hit the continue button but we can be fancier and automate this
+  if not dap.session() then
+    dap.listeners.after.stackTrace.xv6_initial_continue = function(session)
+      dap.listeners.after.stackTrace.xv6_initial_continue = nil
+      if session.config.name ~= "xv6: Attach to ./ag run --gdb" then
+        return
+      end
+
+      vim.schedule(function()
+        if dap.session() == session then
+          dap.continue()
+        end
+      end)
+    end
+  end
+
+  dap.continue()
+end, { desc = "Debug: Continue" })
+
+vim.keymap.set("n", "<F10>", function()
+  require("dap").step_over()
+end, { desc = "Debug: Step over" })
+
+vim.keymap.set("n", "<F11>", function()
+  require("dap").step_into()
+end, { desc = "Debug: Step into" })
+
+vim.keymap.set("n", "<S-F11>", function()
+  require("dap").step_out()
+end, { desc = "Debug: Step out" })
 
 vim.keymap.set("n", "<Leader>dl", function()
   require("dap").run_last()

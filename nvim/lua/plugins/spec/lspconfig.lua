@@ -1,7 +1,7 @@
 --- @type LazyPluginSpec
 return {
   "neovim/nvim-lspconfig",
-  ft = { "lua", "typescript", "javascript", "json", "yaml", "sh", "zsh", "c", "cpp", "go", "python", "java" },
+  ft = { "lua", "typescript", "javascript", "json", "yaml", "sh", "zsh", "c", "cpp", "go", "python", "java", "verilog" },
   dependencies = {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
@@ -44,77 +44,15 @@ return {
   end,
   cmd = { "LspInfo", "LspInstall", "LspUninstall" },
   config = function()
-    local lspconfig = require "lspconfig"
-
-    lspconfig.lua_ls.setup {}
-
-    -- vim.lsp.config(
-    --   "luals",
-    --   {
-    --     capabilities = require("blink.cmp").get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities()),
-    --     root_markers = { ".git" },
-    --     on_attach = function()
-    --       -- will do attach keybinds later
-    --     end,
-    --   }
-    -- )
-
-    --local on_attach = require("nvchad.configs.lspconfig").on_attach
-    -- local on_init = require("nvchad.configs.lspconfig").on_init
-    --local capabilities = require("nvchad.configs.lspconfig").capabilities
-
-    -- lspconfig.ts_ls.setup { autostart = false }
-
     -- NOTE: bashls doesn't work without shellcheck, this has to be installed
 
-    local lspconfig = require "lspconfig"
-    local servers = { "html", "cssls", "jdtls", "clangd", "cmake", "bashls", "gopls", "pyright" }
+    vim.lsp.config("*", {
+      capabilities = require("blink.cmp").get_lsp_capabilities(),
+    })
 
-    -- lsps with default config
-    -- for _, lsp in ipairs(servers) do
-    --   lspconfig[lsp].setup {
-    --     on_attach = on_attach,
-    --     on_init = on_init,
-    --     capabilities = capabilities,
-    --   }
-    -- end
+    vim.lsp.config("lua_ls", {})
 
-    -- typescript
-    -- lspconfig.ts_ls.setup {
-    --   on_attach = on_attach,
-    --   on_init = on_init,
-    --   capabilities = capabilities,
-    -- }
-    --
-    -- lspconfig.lua_ls.setup({
-    --     on_init = function(client)
-    --       if client.workspace_folders then
-    --         local path = client.workspace_folders[1].name
-    --         if path ~= vim.fn.stdpath('config') and (vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc')) then
-    --           return
-    --         end
-    --       end
-    --
-    --       client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
-    --         runtime = {
-    --           version = 'LuaJIT',
-    --           path = { 'lua/?.lua', 'lua/?/init.lua' },
-    --         },
-    --         workspace = {
-    --           checkThirdParty = false,
-    --           library = { vim.env.VIMRUNTIME }
-    --         }
-    --       })
-    --     end,
-    --     settings = { Lua = {} }
-    --   })
-
-    lspconfig.vtsls.setup {
-      on_attach = function(client, bufnr)
-        if client.server_capabilities.inlayHintProvider then
-          vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-        end
-      end,
+    vim.lsp.config("vtsls", {
       settings = {
         complete_function_calls = true,
         vtsls = {
@@ -142,36 +80,45 @@ return {
           },
         },
       },
-    }
+    })
 
-    lspconfig.bashls.setup {
+    vim.lsp.config("bashls", {
       filetypes = { "zsh", "sh" },
-    }
+    })
 
-    lspconfig.verible.setup {
-      on_attach = on_attach,
-      on_init = on_init,
-      capabilities = capabilities,
-      filetypes = { "sv", "systemverilog" },
-    }
+    -- TODO: i already wasted far too much time getting verilog to work it can be hardcoded to lab0 for now
+    vim.lsp.config("svlangserver", {
+      filetypes = { "verilog", "systemverilog" },
+      settings = {
+        systemverilog = {
+          includeIndexing = { "**/*.{v,vh,sv,svh}" },
+          excludeIndexing = {},
+          launchConfiguration = "verilator --lint-only -Wall -y ~/Classes/cs3220/lab0 +libext+.v",
+          formatCommand = "verible-verilog-format",
+        },
+      },
+    })
+
+    --vim.lsp.config("verible", {
+    --  cmd = { "verible-verilog-ls", "--rules=-module-filename" },
+    --  filetypes = { "verilog", "systemverilog" },
+    --})
 
     -- not sure how i missed this my whole life, but json schemas for everyone!
     -- no more manually entering schemas...
-    lspconfig.jsonls.setup {
+    vim.lsp.config("jsonls", {
       settings = {
         json = {
           schemas = require("schemastore").json.schemas(),
           validate = { enable = true },
         },
       },
-    }
+    })
 
-    lspconfig.yamlls.setup {
-      on_attach = function(client, bufnr)
+    vim.lsp.config("yamlls", {
+      on_attach = function(client)
         client.server_capabilities.documentFormattingProvider = true
-        on_attach(client, bufnr)
       end,
-      capabilities = capabilities,
       settings = {
         yaml = {
           schemas = {
@@ -208,6 +155,8 @@ return {
           },
         },
       },
-    }
+    })
+
+    vim.lsp.enable { "lua_ls", "vtsls", "bashls", "svlangserver", "jsonls", "yamlls" }
   end,
 }

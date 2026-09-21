@@ -20,6 +20,18 @@ return {
 
     sources = {
       default = { "lsp", "path", "snippets", "buffer" },
+      providers = {
+        lsp = {
+          override = {
+            -- i love verilog verilog makes me happy verilog lsps have no problems verilog does not require any extra work
+            get_trigger_characters = function(self)
+              local chars = self:get_trigger_characters() or {}
+              vim.list_extend(chars, { "." })
+              return chars
+            end,
+          },
+        },
+      },
     },
 
     fuzzy = { implementation = "prefer_rust_with_warning" },

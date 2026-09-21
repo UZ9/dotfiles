@@ -1,5 +1,6 @@
 ---@type LazyPluginSpec
 return {
+  enabled = false,
   "epwalsh/obsidian.nvim",
   version = "*",
   ft = "markdown",
