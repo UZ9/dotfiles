@@ -1,7 +1,7 @@
 --- @type LazyPluginSpec
 return {
   "neovim/nvim-lspconfig",
-  event = "VeryLazy",
+  ft = { "lua", "typescript", "javascript", "json", "yaml", "sh", "zsh", "c", "cpp", "go", "python", "java" },
   dependencies = {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",

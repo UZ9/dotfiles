@@ -1,8 +1,7 @@
 --- @type LazyPluginSpec
 return {
   "nvim-treesitter/nvim-treesitter",
-  lazy = false,
-  dependencies = { "neovim/nvim-lspconfig" },
+  event = { "BufReadPost", "BufNewFile" },
   config = function(_, opts)
     local preinstalled_langs = {
       ensure_installed = { "bash", "python", "lua", "yaml", "json", "toml" },

@@ -11,7 +11,13 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
+vim.opt.rtp:prepend(vim.fn.stdpath "data" .. "/lazy/tokyonight.nvim")
+vim.cmd "colorscheme tokyonight"
+
 local lazy_config = require "configs.lazy"
+
+
+-- require("tokyonight").load()
 
 -------- NVChad initialization --------
 -- load plugins
@@ -26,7 +32,7 @@ require("lazy").setup({
   --   end,
   -- },
 
-  { import = "plugins" },
+  { import = "plugins.spec" },
 }, lazy_config)
 
 -- Load theme
@@ -40,4 +46,3 @@ vim.schedule(function()
   require "options"
 end)
 
-require("tokyonight").load()

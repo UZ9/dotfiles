@@ -1,12 +1,17 @@
+-- return {
+--   "nvim-lualine/lualine.nvim",
+--   event = "VeryLazy",
+--   config = function()
+--     require("lualine").setup {
+--       options = {
+--         theme = "ayu_mirage",
+--       },
+--     }
+--   end,
+--   dependencies = { "nvim-tree/nvim-web-devicons" },
+-- }
+
+
 return {
-  "nvim-lualine/lualine.nvim",
-  lazy = false,
-  config = function()
-    require("lualine").setup {
-      options = {
-        theme = "ayu_mirage",
-      },
-    }
-  end,
-  dependencies = { "nvim-tree/nvim-web-devicons" },
+  'nvim-mini/mini.statusline', version = false 
 }

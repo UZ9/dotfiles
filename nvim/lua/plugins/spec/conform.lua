@@ -1,7 +1,7 @@
 ---@type NvPluginSpec
 return {
   "stevearc/conform.nvim",
-  lazy = false,
+  event = "VeryLazy",
   config = function()
     local options = {
       formatters_by_ft = {
