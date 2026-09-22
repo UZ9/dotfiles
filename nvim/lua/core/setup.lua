@@ -15,7 +15,7 @@ vim.g.filetype_v = "verilog"
 vim.opt.rtp:prepend(lazypath)
 
 vim.opt.rtp:prepend(vim.fn.stdpath "data" .. "/lazy/tokyonight.nvim")
-vim.cmd "colorscheme tokyonight"
+-- vim.cmd "colorscheme ayu"
 
 local lazy_config = require "configs.lazy"
 
@@ -25,16 +25,6 @@ local lazy_config = require "configs.lazy"
 -------- NVChad initialization --------
 -- load plugins
 require("lazy").setup({
-  -- {
-  --   "NvChad/NvChad",
-  --   lazy = false,
-  --   branch = "v2.5",
-  --   import = "nvchad.plugins",
-  --   config = function()
-  --     require "options"
-  --   end,
-  -- },
-
   { import = "plugins.spec" },
 }, lazy_config)
 

@@ -1,6 +1,17 @@
 return {
   'anurag3301/nvim-platformio.lua',
-  lazy = false,
+  cmd = {
+    'Pioinit',
+    'PioLSP',
+    'Piorun',
+    'Piomon',
+    'Piolsserial',
+    'Piolib',
+    'Piocmdh',
+    'Piocmdf',
+    'Piodebug',
+    'PioTermList',
+  },
   dependencies = {
     { 'nvim-telescope/telescope.nvim' },
     { 'nvim-telescope/telescope-ui-select.nvim' },
